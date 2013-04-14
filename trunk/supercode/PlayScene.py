@@ -24,6 +24,14 @@ _tile_info_lookup = {
 	'ct': ('tiles/counter-top.png', False),
 	'cb': ('tiles/counter-bottom.png', False),
 	
+	'tl': ('tiles/counter-topleft.png', False),
+	'bl': ('tiles/counter-bottomleft.png', False),
+	
+	'tr': ('tiles/counter-topright.png', False),
+	'br': ('tiles/counter-bottomright.png', False),
+	
+	
+	
 	'C7': ('tiles/walltop-convex-lowerright.png', False),
 	'C9': ('tiles/walltop-convex-lowerleft.png', False),
 	'C1': ('tiles/walltop-convex-upperright.png', False),
@@ -61,8 +69,8 @@ class PlayScene:
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 f8 F3 f5 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 f2 F9 f5 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 c2 C9 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 ct ct ct ct ct ct ct c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 cb cb cb cb cb cb cb c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 tl ct ct ct ct ct tr c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 bl cb cb cb cb cb br c6',
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
