@@ -4,7 +4,7 @@ import os
 import math
 import random
 
-from TitleScene import *
+from supercode.TitleScene import TitleScene
 
 class MyEvent:
 	def __init__(self, action, down):
@@ -15,6 +15,7 @@ class MyEvent:
 def startgame():
 	pygame.init()
 	screen = pygame.display.set_mode((800, 600))
+	pygame.display.set_caption("Super Shop")
 	fps = 30
 	active_scene = TitleScene()
 	counter = 0
