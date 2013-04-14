@@ -230,9 +230,25 @@ class PlayScene:
 		customer = self.session.check_for_customer()
 		
 		if customer != None:
-			# TODO: make sure counters aren't double-occupied
-			customer.set_counter_slot(int(random.random() * 4) + 1)
-			self.sprites.append(customer)
+			is_hero = customer.is_hero
+			taken = {}
+			for i in range(6):
+				taken[i] = False
+			for sprite in self.sprites:
+				if sprite != self.player and sprite.is_hero == is_hero:
+					taken[sprite.counter_slot] = True
+			open = []
+			for k in taken.keys():
+				if not taken[k]:
+					open.append(k)
+			random.shuffle(open)
+			
+			if (len(open) > 0):
+				customer.set_counter_slot(open[0])
+				self.sprites.append(customer)
+			else:
+				# counter full. reject customer
+				self.session.reject_last_customer()
 		
 		for sprite in self.sprites:
 			if sprite != self.player:
