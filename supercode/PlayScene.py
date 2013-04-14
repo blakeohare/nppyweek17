@@ -298,6 +298,9 @@ class PlayScene:
 						screen.blit(get_image('boxes/' + d), (icon_x[slot] + offset, icon_y))
 						icon_y += 54
 					
+		
+		screen.blit(get_image('misc/budget_bar'), (10, 10))
+		screen.blit(get_text("Budget: $1,000.00"), (30, 30))
 					
 					
 	def render1(self, screen, rcounter):
