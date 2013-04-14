@@ -51,7 +51,12 @@ class TitleScene:
 		
 		if self.bg_cache == None:
 			self.bg_cache = screen.copy()
-			self.bg_cache.blit(get_image('title/bg.png'), (0, 0))
+			bg_slice = get_image('title/bg_slice.png')
+			t = pygame.Surface((25, 700))
+			for i in range(25):
+				t.blit(bg_slice, (i, 0))
+			for i in range(0, 1000, 25):
+				self.bg_cache.blit(t, (i, 0))
 			city = get_image('title/skyline.png')
 			self.bg_cache.blit(city, (0, screen.get_height() - city.get_height()))
 			self.bg_cache.blit(get_image('title/words.png'), (78, 61))
