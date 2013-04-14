@@ -1,2 +1,5 @@
 player:3
-etc:5
+joker:3
+batman:3
+riddler:3
+superman:3
