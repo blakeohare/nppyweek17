@@ -46,7 +46,7 @@ def startgame():
 					action = 'right'
 				elif e.key == pygame.K_DOWN:
 					action = 'down'
-				elif e.key == pygame.K_SPACE:
+				elif e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
 					action = 'lift'
 				
 				events.append(MyEvent(action, down))
