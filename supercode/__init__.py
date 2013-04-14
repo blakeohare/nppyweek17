@@ -47,6 +47,10 @@ def startgame():
 					action = 'right'
 				elif e.key == pygame.K_DOWN:
 					action = 'down'
+				elif e.key == pygame.K_s:
+					action = 'single'
+				elif e.key == pygame.K_f:
+					action = 'full'
 				elif e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
 					action = 'lift'
 				

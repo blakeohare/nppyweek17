@@ -14,6 +14,7 @@ class Sprite:
 		self.v = 3.3 # TODO: adjust per sprite type
 		self.walking = False
 		self.direction = 'down'
+		self.holding = None
 	
 	def get_max_walk(self, key):
 		if len(_max_walk_lookup) == 0:
