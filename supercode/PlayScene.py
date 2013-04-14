@@ -96,8 +96,8 @@ class PlayScene:
 			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
-			'c4 f1 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f3 c6',
-			'c1 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c3'
+			'c4 f1 f2 f5 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f5 f2 f3 c6',
+			'c1 c2 c2 f5 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 f5 c2 c2 c3'
 			]
 		
 		# Transpose this
@@ -226,8 +226,24 @@ class PlayScene:
 		self.player.try_move(dx, dy)
 			
 	def update(self, counter):
+		self.session.update()
+		customer = self.session.check_for_customer()
+		
+		if customer != None:
+			# TODO: make sure counters aren't double-occupied
+			customer.set_counter_slot(int(random.random() * 4) + 1)
+			self.sprites.append(customer)
+		
 		for sprite in self.sprites:
-			sprite.update(self.grid, self.sprites)
+			if sprite != self.player:
+				sprite.automate()
+		
+		new_sprites = []
+		for sprite in self.sprites:
+			if not sprite.destroy_me:
+				sprite.update(self.grid, self.sprites)
+				new_sprites.append(sprite)
+		self.sprites = new_sprites
 	
 	def render2(self, screen, counter):
 		pass

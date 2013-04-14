@@ -3,9 +3,20 @@ from supercode.Util import *
 
 _max_walk_lookup = {}
 _collide_margin = 6.0 / 16.0
+
+HERO_DOOR = (25, 14)
+HERO_COUNTER_LEFT = (HERO_DOOR[0] - 2, HERO_DOOR[1] - 4)
+
+VILLAIN_DOOR = (3, 14)
+VILLAIN_COUNTER_LEFT = (VILLAIN_DOOR[0] - 1, VILLAIN_DOOR[1] - 4)
+
+SIDEWAYS_Y = HERO_DOOR[1] - 2
+
 class Sprite:
-	def __init__(self, key):
+	def __init__(self, key, is_hero=False, demands=[], target=None):
 		self.max_walk = self.get_max_walk(key)
+		self.is_hero = is_hero
+		self.demands = demands
 		self.key = key
 		self.x = 0.0
 		self.y = 0.0
@@ -15,6 +26,13 @@ class Sprite:
 		self.walking = False
 		self.direction = 'down'
 		self.holding = None
+		self.phase = 0
+		self.counter_slot = -1
+		self.lifetime = 0
+		self.destroy_me = False
+	
+	def set_counter_slot(self, n):
+		self.counter_slot = n
 	
 	def get_max_walk(self, key):
 		if len(_max_walk_lookup) == 0:
@@ -54,6 +72,108 @@ class Sprite:
 			return False
 		return True
 	
+	
+	# Phases:
+	# 1 - walk through door and up
+	# 2 - Walk sideways to target X
+	# 3 - Walk up to counter
+	# 4 - Wait at counter
+	# 5 - Walk down to back wall
+	# 6 - walk sideways to door X
+	# 7 - Walk down out of door
+	def automate(self):
+		
+		door = HERO_DOOR if self.is_hero else VILLAIN_DOOR
+		door = (door[0] + .5, door[1])
+		counter_left = HERO_COUNTER_LEFT if self.is_hero else VILLAIN_COUNTER_LEFT
+		counter_y = counter_left[1]
+		counter_x = counter_left[0]
+		
+		# put them in the doorway
+		if self.phase == 0:
+			self.x, self.y = door
+			self.phase = 1
+		
+		# walk through door and up until you hit SIDEWAYS_Y
+		if self.phase == 1:
+			if self.y < SIDEWAYS_Y:
+				self.phase = 2
+				self._p_origin = self.x
+			else:
+				self.dy = -1
+				return
+		
+		# walk sideways to your self.counter_slot
+		if self.phase == 2:
+			target = counter_x + (self.counter_slot - 1) + .5
+			if self._p_origin == target:
+				self.phase = 3
+			elif self._p_origin < target: # walk right
+				if self.x >= target:
+					self.phase = 3
+				else:
+					self.dx = 1
+					return
+			elif self._p_origin > target: # walk left
+				if self.x <= target:
+					self.phase = 3
+				else:
+					self.dx = -1
+					return
+		
+		# walk up to the counter
+		if self.phase == 3:
+			go_to_y = counter_y + 1.5 # middle of the tile in front of the counter
+			if self.y <= go_to_y:
+				self.phase = 4
+			else:
+				self.dy = -1
+				return
+		
+		# wait until you have your order
+		if self.phase == 4:
+			if len(self.demands) == 0:
+				self.phase = 5
+			else:
+				return 
+		
+		# walk down until you hit sideways_y
+		if self.phase == 5:
+			if self.y < SIDEWAYS_Y:
+				self.dy = 1
+				return
+			else:
+				self.phase = 6
+				self._p_origin = self.x
+		
+		# walk horizontally until you hit the door x
+		if self.phase == 6:
+			target = door[0]
+			if self._p_origin == target:
+				self.phase = 7
+			elif self._p_origin < target: # walk right to door point
+				if self.x >= door[0]:
+					self.phase = 7
+				else:
+					self.dx = 1
+					return
+			elif self._p_origin > target: # walk left to door point
+				if self.x <= door[0]:
+					self.phase = 7
+				else:
+					self.dx = -1
+					return
+		
+		# walk down until you hit the door, then kill yourself
+		if self.phase == 7:
+			if self.y < door[1]:
+				self.dy = 1
+				return
+			else:
+				self.destroy_me = True
+		
+			
+		
 	def update(self, grid, others):
 		dx = self.dx / 16.0
 		dy = self.dy / 16.0
@@ -79,7 +199,8 @@ class Sprite:
 		
 		self.dx = 0.0
 		self.dy = 0.0
-	
+		self.lifetime += 1
+		
 	
 	
 	def render(self, screen, offsetx, offsety, counter):
