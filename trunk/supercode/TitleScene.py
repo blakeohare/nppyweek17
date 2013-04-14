@@ -1,10 +1,12 @@
 import pygame
 from supercode.Util import *
+from supercode.PlayScene import *
 
 class TitleScene:
 	def __init__(self):
 		self.next = self
 		self.selection = 0
+		self.choice_keys = ['tutorial', 'play', 'options', 'credits', 'quit']
 	
 	def process_input(self, events):
 		for event in events:
@@ -22,7 +24,20 @@ class TitleScene:
 				self.selection = 4
 	
 	def do(self):
-		pass
+		# POLISH: transition scenes
+		key = self.choice_keys[self.selection]
+		if key == 'quit':
+			self.next = None
+		elif key == 'play':
+			self.next = PlayScene()
+		elif key == 'tutorial':
+			self.next = TutorialScene()
+		elif key == 'options':
+			self.next = OptionsScene()
+		elif key == 'credits':
+			self.next = CreditsScene()
+		else:
+			pass # This shouldn't happen
 	
 	def update(self, counter):
 		pass
@@ -46,9 +61,9 @@ class TitleScene:
 		x = 290
 		y = 230
 		i = 0
-		choice_key = ['tutorial', 'play', 'options', 'credits', 'quit']
+		
 		blot = get_image('title/blot.png')
-		for choice in choice_key:
+		for choice in self.choice_keys:
 			screen.blit(get_image('title/option_' + choice), (x, y))
 			
 			if i == self.selection:
