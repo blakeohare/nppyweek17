@@ -37,10 +37,10 @@ _tile_info_lookup = {
 	'C1': ('tiles/walltop-convex-upperright.png', False),
 	'C3': ('tiles/walltop-convex-upperleft.png', False),
 	
-	'F7': ('tiles/floor-convex-lowerright.png', False),
-	'F9': ('tiles/floor-convex-lowerleft.png', False),
-	'F1': ('tiles/floor-convex-upperright.png', False),
-	'F3': ('tiles/floor-convex-upperleft.png', False),
+	'F7': ('tiles/floor-convex-lowerright.png', True),
+	'F9': ('tiles/floor-convex-lowerleft.png', True),
+	'F1': ('tiles/floor-convex-upperright.png', True),
+	'F3': ('tiles/floor-convex-upperleft.png', True),
 	
 	'xx': (None, True)
 }
@@ -102,7 +102,7 @@ class PlayScene:
 		self.grid = cols
 		
 		self.player.x = 1.5
-		self.player.y = 1.5
+		self.player.y = 2.5
 		
 	def process_input(self, events, pressed_keys):
 		for event in events:

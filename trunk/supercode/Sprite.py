@@ -11,7 +11,7 @@ class Sprite:
 		self.y = 0.0
 		self.dx = 0.0
 		self.dy = 0.0
-		self.v = 1.3 # TODO: adjust per sprite type
+		self.v = 3.3 # TODO: adjust per sprite type
 		self.walking = False
 		self.direction = 'down'
 	
@@ -44,6 +44,28 @@ class Sprite:
 			elif dy > 0: self.direction = 'down'
 	
 	def update(self, grid, others):
+		dx = self.dx / 16.0
+		dy = self.dy / 16.0
+		
+		old_col = int(self.x)
+		old_row = int(self.y)
+		new_col = int(self.x + dx)
+		new_row = int(self.y + dy)
+		
+		left_col = int(self.x + dx - 6.0 / 16.0)
+		right_col = int(self.x + dx + 6.0 / 16.0)
+		
+		passes = True
+		for col_check in (left_col, new_col, right_col):
+			tile = grid[col_check][new_row]
+			if not tile.passable:
+				passes = False
+				break
+		
+		if passes:
+			self.x += dx
+			self.y += dy
+		
 		self.dx = 0.0
 		self.dy = 0.0
 	
@@ -64,4 +86,7 @@ class Sprite:
 				'_standing_',
 				self.direction,
 				'.png'])
-		screen.blit(get_image(file), (offsetx + int(self.x * 16), offsety + int(self.y * 16)))
+		img = get_image(file)
+		x = offsetx + int(self.x * 16 - 8)
+		y = offsety + int(self.y * 16 - 32)
+		screen.blit(get_image(file), (x, y))
