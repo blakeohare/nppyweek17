@@ -59,14 +59,14 @@ class Tile:
 		self.key = key
 		self.stack = None
 		data = _tile_info_lookup[key]
-		self._passable = data[1]
+		self.passable = data[1]
 		if data[0] == None:
 			self.image = None
 		else:
 			self.image = get_image(data[0])
 	
 	def is_passable(self):
-		return self._passable and (self.stack == None or len(self.stack) == 0)
+		return self.passable and (self.stack == None or len(self.stack) == 0)
 
 class PlayScene:
 	def __init__(self):
@@ -167,6 +167,10 @@ class PlayScene:
 						tile.stack = tile.stack[:-1]
 		else:
 			fix_loc = False
+			if not tile.passable:
+				play_sound('cant_drop_box')
+				return
+				
 			if tile.stack == None:
 				fix_loc = True
 				tile.stack = []

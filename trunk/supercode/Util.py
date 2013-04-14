@@ -32,3 +32,12 @@ def trim(string):
 	while len(string) > 0 and string[-1] in ' \r\n\t':
 		string = string[:-1]
 	return string
+
+_sound_id_to_file = {
+}
+
+# does a lookup between id's and the actual file name
+def play_sound(id):
+	file = _sound_id_to_file.get(id)
+	# TODO: play that file
+	
