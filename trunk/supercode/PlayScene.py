@@ -5,6 +5,13 @@ from supercode.Util import *
 from supercode.Sprite import *
 from supercode.Box import *
 
+_direction_to_vector = {
+	'left': (-1, 0),
+	'right': (1, 0),
+	'up': (0, -1),
+	'down': (0, 1)
+}
+
 _tile_info_lookup = {
 	'c7': ('tiles/walltop-upperleft.png', False),
 	'c8': ('tiles/walltop-uppermiddle.png', False),
@@ -114,8 +121,6 @@ class PlayScene:
 		self.set_up_boxes(10)
 	
 	def create_random_boxes(self, count):
-		
-	
 		storage_left = 1
 		storage_width = 5
 		storage_top = 2
@@ -143,9 +148,44 @@ class PlayScene:
 				tile.stack = []
 			tile.stack.append(b)
 	
+	def lift(self, is_full):
+		dxdy = _direction_to_vector[self.player.direction]
+		x = int(self.player.x) + dxdy[0]
+		y = int(self.player.y) + dxdy[1]
+		tile = self.grid[x][y]
+		
+		if self.player.holding == None:
+			if tile.stack != None:
+				if is_full:
+					self.player.holding = tile.stack
+					tile.stack = None
+				else:
+					self.player.holding = [tile.stack[-1]]
+					if len(tile.stack) == 1:
+						tile.stack = None
+					else:
+						tile.stack = tile.stack[:-1]
+		else:
+			if tile.stack == None:
+				tile.stack = []
+			
+			if is_full:
+				tile.stack += self.player.holding
+				self.player.holding = None
+			else:
+				a = self.player.holding[0]
+				tile.stack.append(a)
+				if len(self.player.holding) == 1:
+					self.player.holding = None
+				else:
+					self.player.holding = self.player.holding[1:]
+		
+	
 	def process_input(self, events, pressed_keys):
 		for event in events:
-			pass
+			if event.down:
+				if event.action == 'full' or event.action == 'single':
+					self.lift(event.action == 'full')
 		
 		v = 1.3
 		dx = 0
