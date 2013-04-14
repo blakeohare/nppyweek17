@@ -1,9 +1,11 @@
 #import pygame # it'd be cool if I could leave this commented out
 
 import random
-from supercode.Util import *
-from supercode.Sprite import *
+
 from supercode.Box import *
+from supercode.Session import *
+from supercode.Sprite import *
+from supercode.Util import *
 
 _direction_to_vector = {
 	'left': (-1, 0),
@@ -72,6 +74,7 @@ class PlayScene:
 	def __init__(self):
 		self.next = self
 		
+		self.session = Session()
 		self.player = Sprite('player')
 		self.player = Sprite('player')
 		self.sprites = [self.player]
@@ -127,9 +130,9 @@ class PlayScene:
 		storage_height = 5
 		
 		output = []
-		colors = 'red yellow green blue aqua black white purple orange pink brown'.split()
+		
 		for i in range(count):
-			box = Box(random.choice(colors), True)
+			box = self.session.get_random_box(True)
 			x = int(random.random() * storage_width) + storage_left
 			y = int(random.random() * storage_height) + storage_top
 			
