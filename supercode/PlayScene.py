@@ -226,9 +226,12 @@ class PlayScene:
 		for sprite in self.sprites:
 			sprite.update(self.grid, self.sprites)
 	
-	def render(self, screen, rcounter):
+	def render2(self, screen, counter):
+		pass
+	
+	def render1(self, screen, rcounter):
 		screen.fill((0, 0, 0))
-		self.render_room(screen, (50, 50), rcounter)
+		self.render_room(screen, (18, 50), rcounter)
 
 	def render_room(self, screen, roomtopleft, rcounter):
 		rows = len(self.grid[0])
