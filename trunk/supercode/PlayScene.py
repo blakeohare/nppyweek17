@@ -20,13 +20,29 @@ _tile_info_lookup = {
 	'f7': ('tiles/floor-upperleft.png', True),
 	'f8': ('tiles/floor-uppermiddle.png', True),
 	'f9': ('tiles/floor-upperright.png', True),
+
+	'ct': ('tiles/counter-top.png', False),
+	'cb': ('tiles/counter-bottom.png', False),
+	
+	'C7': ('tiles/walltop-convex-lowerright.png', False),
+	'C9': ('tiles/walltop-convex-lowerleft.png', False),
+	'C1': ('tiles/walltop-convex-upperright.png', False),
+	'C3': ('tiles/walltop-convex-upperleft.png', False),
+	
+	'F7': ('tiles/floor-convex-lowerright.png', False),
+	'F9': ('tiles/floor-convex-lowerleft.png', False),
+	'F1': ('tiles/floor-convex-upperright.png', False),
+	'F3': ('tiles/floor-convex-upperleft.png', False),
+	
+	'xx': (None, True)
 }
+
 class Tile:
 	def __init__(self, key):
 		self.key = key
 		data = _tile_info_lookup[key]
 		self.passable = data[1]
-		if data[0] == 'xx':
+		if data[0] == None:
 			self.image = None
 		else:
 			self.image = get_image(data[0])
@@ -37,19 +53,21 @@ class PlayScene:
 		
 		# Forgive me father for I am about to sin.
 		m = [
-			'c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9',
-			'c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6',
-			'c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6',
-			'c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3'
+			'c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9 xx xx c7 c8 c8 c8 c8 c8 c8 c8 c9',
+			'c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6 xx xx c4 c5 c5 c5 c5 c5 c5 c5 c6',
+			'c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6 xx xx c4 f7 f8 f8 f8 f8 f8 f9 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 C1 c8 c8 C3 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c5 c5 c5 c5 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 f8 F3 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 f2 F9 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 c2 C9 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 ct ct ct ct ct ct ct c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 cb cb cb cb cb cb cb c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
+			'c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx xx c4 f1 f2 f2 f2 f2 f2 f3 c6',
+			'c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx xx c1 c2 c2 c2 c2 c2 c2 c2 c3'
 			]
 		
 		# Transpose this
