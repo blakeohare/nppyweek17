@@ -2,7 +2,7 @@ import os
 from supercode.Util import *
 
 _max_walk_lookup = {}
-
+_collide_margin = 6.0 / 16.0
 class Sprite:
 	def __init__(self, key):
 		self.max_walk = self.get_max_walk(key)
@@ -44,6 +44,16 @@ class Sprite:
 			if dy < 0: self.direction = 'up'
 			elif dy > 0: self.direction = 'down'
 	
+	def is_overlapping(self, left):
+		x = int(self.x)
+		m = _collide_margin
+		if left:
+			m *= -1
+		x0 = int(self.x + m)
+		if x == x0:
+			return False
+		return True
+	
 	def update(self, grid, others):
 		dx = self.dx / 16.0
 		dy = self.dy / 16.0
@@ -53,8 +63,8 @@ class Sprite:
 		new_col = int(self.x + dx)
 		new_row = int(self.y + dy)
 		
-		left_col = int(self.x + dx - 6.0 / 16.0)
-		right_col = int(self.x + dx + 6.0 / 16.0)
+		left_col = int(self.x + dx - _collide_margin)
+		right_col = int(self.x + dx + _collide_margin)
 		
 		passes = True
 		for col_check in (left_col, new_col, right_col):
@@ -69,6 +79,8 @@ class Sprite:
 		
 		self.dx = 0.0
 		self.dy = 0.0
+	
+	
 	
 	def render(self, screen, offsetx, offsety, counter):
 		if self.walking:

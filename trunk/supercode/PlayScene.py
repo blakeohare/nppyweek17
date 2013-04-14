@@ -166,7 +166,9 @@ class PlayScene:
 					else:
 						tile.stack = tile.stack[:-1]
 		else:
+			fix_loc = False
 			if tile.stack == None:
+				fix_loc = True
 				tile.stack = []
 			
 			if is_full:
@@ -180,6 +182,22 @@ class PlayScene:
 				else:
 					self.player.holding = self.player.holding[1:]
 		
+			# player could possibly set a box down and then be standing in an invalid position
+			# nudge the player closer to the center of his tile to prevent this invalid state
+			if fix_loc:
+				if self.player.direction == 'left' or self.player.direction == 'right':
+					left = self.player.direction == 'left'
+					attempts = 10
+					while self.player.is_overlapping(left) and attempts > 0:
+						cx = int(self.player.x) + 0.5
+						#cy = int(self.player.y) + 0.5 if (not horizontal) else self.player.y
+						self.player.x = cx * .3 + self.player.x * .7
+						#self.player.y = cy * .3 + self.player.y * .7
+						attempts -= 1
+					
+					if attempts == 0: # my paranoia of some bug causing an infinite loop here
+						self.player.x = int(self.player.x) + 0.5
+						self.player.y = int(self.player.y) + 0.5
 	
 	def process_input(self, events, pressed_keys):
 		for event in events:
