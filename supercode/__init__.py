@@ -36,6 +36,8 @@ def startgame():
 				if e.key == pygame.K_F4:
 					if keys_pressed[pygame.K_LALT] or keys_pressed[pygame.K_RALT]:
 						return
+				elif e.key == pygame.K_ESCAPE:
+					return
 				elif e.key == pygame.K_UP:
 					action = 'up'
 				elif e.key == pygame.K_LEFT:
