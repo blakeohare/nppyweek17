@@ -81,7 +81,7 @@ class Sprite:
 	# 5 - Walk down to back wall
 	# 6 - walk sideways to door X
 	# 7 - Walk down out of door
-	def automate(self):
+	def automate(self, grid):
 		
 		door = HERO_DOOR if self.is_hero else VILLAIN_DOOR
 		door = (door[0] + .5, door[1])
@@ -132,8 +132,26 @@ class Sprite:
 		
 		# wait until you have your order
 		if self.phase == 4:
+			
+			cx = int(self.x)
+			cy = int(counter_y - 2)
+			tile = grid[cx][cy]
+			
+			if tile.stack != None:
+				for item in tile.stack:
+					if item.key in self.demands:
+						i = 0
+						while i < len(self.demands):
+							if self.demands[i] == item.key:
+								self.demands = self.demands[:i] + self.demands[i + 1:]
+								break
+							i += 1
+							
+			
 			if len(self.demands) == 0:
 				self.phase = 5
+				self.holding = tile.stack
+				tile.stack = None
 			else:
 				return 
 		

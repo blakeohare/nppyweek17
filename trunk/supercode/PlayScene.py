@@ -253,7 +253,7 @@ class PlayScene:
 		
 		for sprite in self.sprites:
 			if sprite != self.player:
-				sprite.automate()
+				sprite.automate(self.grid)
 		
 		new_sprites = []
 		for sprite in self.sprites:
@@ -270,16 +270,36 @@ class PlayScene:
 			201,
 			243
 		]
+		t = 30
+		icon_x = [
+			x_coords[0] + t + 6,
+			x_coords[1] + t + 6,
+			x_coords[2] + t + 6,
+			x_coords[3] + t + 28,
+			x_coords[4] + t + 52
+		]
+		hero_offset = 621
 		for sprite in self.sprites:
 			if sprite != self.player:
 				if sprite.phase == 4:
-					demand_x = 8 + x_coords[sprite.counter_slot]
+					slot = sprite.counter_slot
+					demand_x = 8 + x_coords[slot]
+					offset = 0
 					if sprite.is_hero:
-						demand_x += 621
+						offset = hero_offset
+					demand_x += offset
+					
 					
 					img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
 					screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
-	
+					height = len(sprite.demands) * 54
+					icon_y = 620 - height // 2
+					for d in sprite.demands:
+						screen.blit(get_image('boxes/' + d), (icon_x[slot] + offset, icon_y))
+						icon_y += 54
+					
+					
+					
 	def render1(self, screen, rcounter):
 		screen.fill((0, 0, 0))
 		self.render_room(screen, (27, 45), rcounter)
