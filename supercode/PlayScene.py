@@ -84,21 +84,21 @@ class PlayScene:
 		
 		# Forgive me father for I am about to sin.
 		m = [
-			'xx xx xx xx xx xx xx xx xx c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9 xx xx xx xx xx xx xx xx xx',
-			'c7 c8 c8 c8 c8 c8 c8 c9 xx c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6 xx c7 c8 c8 c8 c8 c8 c8 c9',
-			'c4 c5 c5 c5 c5 c5 c5 c6 xx c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6 xx c4 c5 c5 c5 c5 c5 c5 c6',
-			'c4 f7 f8 f8 f8 f8 f9 C1 c8 C3 f4 f5 f5 f5 f5 f5 f5 f5 f6 C1 c8 C3 f7 f8 f8 f8 f8 f9 c6',
-			'c4 f4 f5 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f5 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f5 f6 c6',
-			'c4 tl ct ct ct ct tr c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 tl ct ct ct ct tr c6',
-			'c4 bl cb cb cb cb br c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 bl cb cb cb cb br c6',
-			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
-			'c4 f1 f2 f5 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f5 f2 f3 c6',
-			'c1 c2 c2 f5 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 f5 c2 c2 c3'
+			'xx xx xx xx xx xx xx xx c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9 xx xx xx xx xx xx xx xx',
+			'c7 c8 c8 c8 c8 c8 c9 xx c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6 xx c7 c8 c8 c8 c8 c8 c9',
+			'c4 c5 c5 c5 c5 c5 c6 xx c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6 xx c4 c5 c5 c5 c5 c5 c6',
+			'c4 f7 f8 f8 f8 f9 C1 c8 C3 f4 f5 f5 f5 f5 f5 f5 f5 f6 C1 c8 C3 f7 f8 f8 f8 f9 c6',
+			'c4 f4 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f5 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f6 c6',
+			'c4 tl ct ct ct tr c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 tl ct ct ct tr c6',
+			'c4 bl cb cb cb br c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 bl cb cb cb br c6',
+			'c4 f4 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f6 c6',
+			'c4 f1 f2 f5 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f5 f2 f3 c6',
+			'c1 c2 c2 f5 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 f5 c2 c2 c3'
 			]
 		
 		# Transpose this
@@ -233,7 +233,7 @@ class PlayScene:
 		if customer != None:
 			is_hero = customer.is_hero
 			taken = {}
-			for i in range(6):
+			for i in range(5):
 				taken[i] = False
 			for sprite in self.sprites:
 				if sprite != self.player and sprite.is_hero == is_hero:
@@ -263,11 +263,25 @@ class PlayScene:
 		self.sprites = new_sprites
 	
 	def render2(self, screen, counter):
-		pass
+		x_coords = [
+			0,
+			75,
+			149,
+			201,
+			243
+		]
+		for sprite in self.sprites:
+			if sprite != self.player:
+				demand_x = 8 + x_coords[sprite.counter_slot]
+				if sprite.is_hero:
+					demand_x += 621
+				
+				img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
+				screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
 	
 	def render1(self, screen, rcounter):
 		screen.fill((0, 0, 0))
-		self.render_room(screen, (18, 50), rcounter)
+		self.render_room(screen, (27, 45), rcounter)
 
 	def render_room(self, screen, roomtopleft, rcounter):
 		rows = len(self.grid[0])

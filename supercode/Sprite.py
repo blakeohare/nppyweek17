@@ -4,8 +4,8 @@ from supercode.Util import *
 _max_walk_lookup = {}
 _collide_margin = 6.0 / 16.0
 
-HERO_DOOR = (25, 14)
-HERO_COUNTER_LEFT = (HERO_DOOR[0] - 2, HERO_DOOR[1] - 4)
+HERO_DOOR = (23, 14)
+HERO_COUNTER_LEFT = (HERO_DOOR[0] - 1, HERO_DOOR[1] - 4)
 
 VILLAIN_DOOR = (3, 14)
 VILLAIN_COUNTER_LEFT = (VILLAIN_DOOR[0] - 1, VILLAIN_DOOR[1] - 4)

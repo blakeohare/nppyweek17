@@ -3,7 +3,7 @@ import random
 from supercode.Box import *
 from supercode.Sprite import *
 
-all_colors = 'red orange yellow lime green aqua blue purple pink brown'.split()
+all_colors = 'blue red orange yellow lime green aqua purple pink brown'.split()
 polarities = 'h v n'.split()
 
 STARTING_BUDGET = 1000
@@ -18,6 +18,7 @@ class Session:
 		self.balance = 0.5
 		self.reputation = 1.0
 		self.budget = STARTING_BUDGET
+		self.spectrum_available = 2
 		
 		self.prices = {}
 		for color in all_colors:
@@ -28,7 +29,7 @@ class Session:
 	
 	def get_random_box(self, is_free):
 		# TODO: this function should weight itself on stuff
-		color = random.choice(all_colors)
+		color = random.choice(all_colors[:self.spectrum_available])
 		polarity = random.choice(polarities)
 		
 		key = polarity + '_' + color
@@ -48,7 +49,7 @@ class Session:
 	
 	def check_for_customer(self):
 		
-		if self.counter % (30 * 5) == 0:
+		if self.counter % (3 * 5) == 0:
 			pass
 		else:
 			return None
