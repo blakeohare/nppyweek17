@@ -1,7 +1,9 @@
 #import pygame # it'd be cool if I could leave this commented out
 
+import random
 from supercode.Util import *
 from supercode.Sprite import *
+from supercode.Box import *
 
 _tile_info_lookup = {
 	'c7': ('tiles/walltop-upperleft.png', False),
@@ -50,11 +52,14 @@ class Tile:
 		self.key = key
 		self.stack = None
 		data = _tile_info_lookup[key]
-		self.passable = data[1]
+		self._passable = data[1]
 		if data[0] == None:
 			self.image = None
 		else:
 			self.image = get_image(data[0])
+	
+	def is_passable(self):
+		return self._passable and (self.stack == None or len(self.stack) == 0)
 
 class PlayScene:
 	def __init__(self):
@@ -63,6 +68,8 @@ class PlayScene:
 		self.player = Sprite('player')
 		self.player = Sprite('player')
 		self.sprites = [self.player]
+		
+		self.sprites_by_row = None
 		
 		# Forgive me father for I am about to sin.
 		m = [
@@ -101,9 +108,41 @@ class PlayScene:
 			
 		self.grid = cols
 		
-		self.player.x = 1.5
+		self.player.x = 15.5
 		self.player.y = 2.5
 		
+		self.set_up_boxes(10)
+	
+	def create_random_boxes(self, count):
+		
+	
+		storage_left = 1
+		storage_width = 5
+		storage_top = 2
+		storage_height = 5
+		
+		output = []
+		colors = 'red yellow green blue aqua black white purple orange pink brown'.split()
+		for i in range(count):
+			box = Box(random.choice(colors), True)
+			x = int(random.random() * storage_width) + storage_left
+			y = int(random.random() * storage_height) + storage_top
+			
+			output.append([box, x, y])
+			
+		return output
+		
+	def set_up_boxes(self, count):
+		boxes = self.create_random_boxes(count)
+		for box in boxes:
+			b = box[0]
+			x = box[1]
+			y = box[2]
+			tile = self.grid[x][y]
+			if tile.stack == None:
+				tile.stack = []
+			tile.stack.append(b)
+	
 	def process_input(self, events, pressed_keys):
 		for event in events:
 			pass
@@ -137,20 +176,42 @@ class PlayScene:
 		left = roomtopleft[0]
 		top = roomtopleft[1]
 		
+		if self.sprites_by_row == None:
+			i = 0
+			self.sprites_by_row = []
+			while i < rows:
+				self.sprites_by_row.append([])
+				i += 1
+		
+		i = 0
+		while i < rows:
+			self.sprites_by_row[i] = []
+			i += 1
+		
+		for sprite in self.sprites:
+			row = int(sprite.y)
+			if row >= 0 and row < rows:
+				self.sprites_by_row[row].append(sprite)
+		
 		row = 0
 		while row < rows:
 			col = 0
 			while col < cols:
-				img = self.grid[col][row].image
+				tile = self.grid[col][row]
+				img = tile.image
 				if img != None:
 					screen.blit(img, (col * 16 + left, row * 16 + top))
+					if tile.stack != None:
+						i = 0
+						x = col + 0.5
+						y = row + 0.5
+						for box in tile.stack:
+							box.render(screen, left, top, x, y, i)
+							i += 1
 				col += 1
+			
+			for sprite in self.sprites_by_row[row]:
+				sprite.render(screen, left, top, rcounter)
 			row += 1
 		
-		self.render_sprites(screen, roomtopleft, rcounter)
 		
-	def render_sprites(self, screen, roomtopleft, rcounter):
-		top = roomtopleft[1]
-		left = roomtopleft[0]
-		for sprite in self.sprites:
-			sprite.render(screen, left, top, rcounter)

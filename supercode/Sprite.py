@@ -58,7 +58,7 @@ class Sprite:
 		passes = True
 		for col_check in (left_col, new_col, right_col):
 			tile = grid[col_check][new_row]
-			if not tile.passable:
+			if not tile.is_passable():
 				passes = False
 				break
 		
