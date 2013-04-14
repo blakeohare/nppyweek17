@@ -80,21 +80,21 @@ class PlayScene:
 		
 		# Forgive me father for I am about to sin.
 		m = [
-			'c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9 xx xx c7 c8 c8 c8 c8 c8 c8 c8 c9',
-			'c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6 xx xx c4 c5 c5 c5 c5 c5 c5 c5 c6',
-			'c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6 xx xx c4 f7 f8 f8 f8 f8 f8 f9 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 C1 c8 c8 C3 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c5 c5 c5 c5 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 f8 F3 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 f2 F9 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 c2 C9 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 tl ct ct ct ct ct tr c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 bl cb cb cb cb cb br c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx xx c4 f4 f5 f5 f5 f5 f5 f6 c6',
-			'c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx xx c4 f1 f2 f2 f2 f2 f2 f3 c6',
-			'c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx xx c1 c2 c2 c2 c2 c2 c2 c2 c3'
+			'xx xx xx xx xx xx xx xx xx c7 c8 c8 c8 c8 c8 c8 c8 c8 c8 c9 xx xx xx xx xx xx xx xx xx',
+			'c7 c8 c8 c8 c8 c8 c8 c9 xx c4 c5 c5 c5 c5 c5 c5 c5 c5 c5 c6 xx c7 c8 c8 c8 c8 c8 c8 c9',
+			'c4 c5 c5 c5 c5 c5 c5 c6 xx c4 f7 f8 f8 f8 f8 f8 f8 f8 f9 c6 xx c4 c5 c5 c5 c5 c5 c5 c6',
+			'c4 f7 f8 f8 f8 f8 f9 C1 c8 C3 f4 f5 f5 f5 f5 f5 f5 f5 f6 C1 c8 C3 f7 f8 f8 f8 f8 f9 c6',
+			'c4 f4 f5 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f5 f5 f5 f5 f6 c5 c5 c5 f4 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f5 f5 f5 f5 F1 f8 f8 f8 F3 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f5 f5 f5 f5 F7 f2 f2 f2 F9 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f5 f5 f5 f5 f6 C7 c2 C9 f4 f5 f5 f5 f5 f6 c6',
+			'c4 tl ct ct ct ct tr c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 tl ct ct ct ct tr c6',
+			'c4 bl cb cb cb cb br c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 bl cb cb cb cb br c6',
+			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
+			'c4 f4 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f6 c6',
+			'c4 f1 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f3 c6',
+			'c1 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c3'
 			]
 		
 		# Transpose this
@@ -115,13 +115,13 @@ class PlayScene:
 			
 		self.grid = cols
 		
-		self.player.x = 15.5
-		self.player.y = 2.5
+		self.player.x = 14.5
+		self.player.y = 12.5
 		
 		self.set_up_boxes(10)
 	
 	def create_random_boxes(self, count):
-		storage_left = 1
+		storage_left = 11
 		storage_width = 5
 		storage_top = 2
 		storage_height = 5
