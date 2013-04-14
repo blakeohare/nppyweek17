@@ -19,6 +19,7 @@ def startgame():
 	fps = 30
 	active_scene = TitleScene()
 	counter = 0
+	pressed_keys = {}
 	while active_scene != None:
 		
 		start = time.time()
@@ -51,7 +52,10 @@ def startgame():
 				
 				events.append(MyEvent(action, down))
 		
-		active_scene.process_input(events)
+		for event in events:
+			pressed_keys[event.action] = event.down
+		
+		active_scene.process_input(events, pressed_keys)
 		active_scene.update(counter)
 		active_scene.render(screen, counter)
 		

@@ -1,6 +1,8 @@
 #import pygame # it'd be cool if I could leave this commented out
 
 from supercode.Util import *
+from supercode.Sprite import *
+
 _tile_info_lookup = {
 	'c7': ('tiles/walltop-upperleft.png', False),
 	'c8': ('tiles/walltop-uppermiddle.png', False),
@@ -30,8 +32,6 @@ _tile_info_lookup = {
 	'tr': ('tiles/counter-topright.png', False),
 	'br': ('tiles/counter-bottomright.png', False),
 	
-	
-	
 	'C7': ('tiles/walltop-convex-lowerright.png', False),
 	'C9': ('tiles/walltop-convex-lowerleft.png', False),
 	'C1': ('tiles/walltop-convex-upperright.png', False),
@@ -48,6 +48,7 @@ _tile_info_lookup = {
 class Tile:
 	def __init__(self, key):
 		self.key = key
+		self.stack = None
 		data = _tile_info_lookup[key]
 		self.passable = data[1]
 		if data[0] == None:
@@ -58,6 +59,10 @@ class Tile:
 class PlayScene:
 	def __init__(self):
 		self.next = self
+		
+		self.player = Sprite('player')
+		self.player = Sprite('player')
+		self.sprites = [self.player]
 		
 		# Forgive me father for I am about to sin.
 		m = [
@@ -96,26 +101,56 @@ class PlayScene:
 			
 		self.grid = cols
 		
-	def process_input(self, events):
-		pass
-	
+		self.player.x = 1.5
+		self.player.y = 1.5
+		
+	def process_input(self, events, pressed_keys):
+		for event in events:
+			pass
+		
+		v = 1.3
+		dx = 0
+		dy = 0
+		if pressed_keys.get('left'):
+			dx = -1
+		elif pressed_keys.get('right'):
+			dx = 1
+		if pressed_keys.get('up'):
+			dy = -1
+		elif pressed_keys.get('down'):
+			dy = 1
+		self.player.try_move(dx, dy)
+			
 	def update(self, counter):
-		pass
+		for sprite in self.sprites:
+			sprite.update(self.grid, self.sprites)
 	
 	def render(self, screen, rcounter):
 		screen.fill((0, 0, 0))
-		
+		self.render_room(screen, (50, 50), rcounter)
+
+	def render_room(self, screen, roomtopleft, rcounter):
 		rows = len(self.grid[0])
 		cols = len(self.grid)
 		grid = self.grid
+		
+		left = roomtopleft[0]
+		top = roomtopleft[1]
+		
 		row = 0
 		while row < rows:
 			col = 0
 			while col < cols:
 				img = self.grid[col][row].image
 				if img != None:
-					screen.blit(img, (col * 16 + 50, row * 16 + 50))
+					screen.blit(img, (col * 16 + left, row * 16 + top))
 				col += 1
 			row += 1
-
-
+		
+		self.render_sprites(screen, roomtopleft, rcounter)
+		
+	def render_sprites(self, screen, roomtopleft, rcounter):
+		top = roomtopleft[1]
+		left = roomtopleft[0]
+		for sprite in self.sprites:
+			sprite.render(screen, left, top, rcounter)

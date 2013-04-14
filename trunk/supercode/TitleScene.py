@@ -8,7 +8,7 @@ class TitleScene:
 		self.selection = 0
 		self.choice_keys = ['play', 'tutorial', 'options', 'credits', 'quit']
 		
-	def process_input(self, events):
+	def process_input(self, events, pressed_keys):
 		for event in events:
 			if event.down:
 				if event.action == 'up':
