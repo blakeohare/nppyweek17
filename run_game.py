@@ -1,0 +1,3 @@
+import supercode
+
+supercode.startgame()
