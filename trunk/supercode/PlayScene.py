@@ -62,6 +62,7 @@ class Tile:
 		self.stack = None
 		data = _tile_info_lookup[key]
 		self.passable = data[1]
+		self.is_counter = key in ('ct', 'cb', 'tl', 'tr', 'bl', 'br')
 		if data[0] == None:
 			self.image = None
 		else:
@@ -170,7 +171,7 @@ class PlayScene:
 						tile.stack = tile.stack[:-1]
 		else:
 			fix_loc = False
-			if not tile.passable:
+			if not tile.passable and not tile.is_counter:
 				play_sound('cant_drop_box')
 				return
 				
