@@ -272,12 +272,13 @@ class PlayScene:
 		]
 		for sprite in self.sprites:
 			if sprite != self.player:
-				demand_x = 8 + x_coords[sprite.counter_slot]
-				if sprite.is_hero:
-					demand_x += 621
-				
-				img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
-				screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
+				if sprite.phase == 4:
+					demand_x = 8 + x_coords[sprite.counter_slot]
+					if sprite.is_hero:
+						demand_x += 621
+					
+					img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
+					screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
 	
 	def render1(self, screen, rcounter):
 		screen.fill((0, 0, 0))
