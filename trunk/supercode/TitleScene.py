@@ -7,6 +7,7 @@ class TitleScene:
 		self.next = self
 		self.selection = 0
 		self.choice_keys = ['play', 'tutorial', 'options', 'credits', 'quit']
+		self.bg_cache = None
 		
 	def process_input(self, events, pressed_keys):
 		for event in events:
@@ -42,24 +43,35 @@ class TitleScene:
 	def update(self, counter):
 		pass
 	
-	def render(self, screen, render_counter):
-		screen.blit(get_image('title/bg.png'), (0, 0))
-		city = get_image('title/skyline.png')
-		screen.blit(city, (0, screen.get_height() - city.get_height()))
+	def render1(self, screen, render_counter):
+		# render at full resolution
+		pass
+	
+	def render2(self, screen, render_counter):
+		
+		if self.bg_cache == None:
+			self.bg_cache = screen.copy()
+			self.bg_cache.blit(get_image('title/bg.png'), (0, 0))
+			city = get_image('title/skyline.png')
+			self.bg_cache.blit(city, (0, screen.get_height() - city.get_height()))
+			self.bg_cache.blit(get_image('title/words.png'), (78, 61))
+			self.bg_cache.blit(get_image('title/speech.png'), (278, 243))
+		
+		screen.blit(self.bg_cache, (0, 0))
+		
 		character = get_image('title/character.png')
 		capes = legacy_map(lambda x:get_image('title/cape_' + str(x)), range(1, 6))
-		capes = capes + capes[:len(capes) - 1][::-1]
-		cape = capes[(render_counter // 1) % len(capes)]
+		capes = capes + capes[1:len(capes) - 1][::-1]
+		cape = capes[(render_counter // 3) % len(capes)]
 		
-		screen.blit(cape, (614, 277))
-		screen.blit(character, (596, 259))
+		t = 3
+		screen.blit(cape, (768, 318 + t))
+		screen.blit(character, (753, 300 + t))
 		
-		screen.blit(get_image('title/words.png'), (52, 60))
 		
-		screen.blit(get_image('title/speech.png'), (225, 207))
 		
-		x = 290
-		y = 230
+		x = 363
+		y = 272
 		i = 0
 		
 		blot = get_image('title/blot.png')
@@ -69,7 +81,8 @@ class TitleScene:
 			if i == self.selection:
 				screen.blit(blot, (x - blot.get_width() - 8, y - 5))
 			
-			x += 20
-			y += 43
+			x += 25
+			y += 44
 			i += 1
 		
+		#pygame.transform.scale(screen, r_screen.get_size(), r_screen)

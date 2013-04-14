@@ -14,7 +14,8 @@ class MyEvent:
 
 def startgame():
 	pygame.init()
-	screen = pygame.display.set_mode((800, 600))
+	r_screen = pygame.display.set_mode((1000, 700))
+	v_screen = pygame.Surface((500, 350))
 	pygame.display.set_caption("Super Shop")
 	fps = 30
 	active_scene = TitleScene()
@@ -61,9 +62,12 @@ def startgame():
 		
 		active_scene.process_input(events, pressed_keys)
 		active_scene.update(counter)
-		active_scene.render(screen, counter)
+		active_scene.render1(v_screen, counter)
+		pygame.transform.scale(v_screen, (1000, 700), r_screen)
+		active_scene.render2(r_screen, counter)
 		
 		active_scene = active_scene.next
+		
 		
 		pygame.display.flip()
 		
