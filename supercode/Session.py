@@ -52,11 +52,6 @@ class Session:
 			pass
 		else:
 			return None
-		# on average, every 15 seconds for now
-		# fps is 30
-		# probability of customer is 1 in 15 * 30
-		#if random.random() * 15 * 30 > 1: # TODO: tweak this
-		#	return None
 		
 		is_hero = random.random() < .5
 		
@@ -67,5 +62,7 @@ class Session:
 		sprite = Sprite(key, is_hero, ['n_blue'])
 		
 		return sprite
-		
+	
+	def reject_last_customer(self):
+		pass
 		
