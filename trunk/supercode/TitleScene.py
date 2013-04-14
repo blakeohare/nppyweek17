@@ -6,8 +6,8 @@ class TitleScene:
 	def __init__(self):
 		self.next = self
 		self.selection = 0
-		self.choice_keys = ['tutorial', 'play', 'options', 'credits', 'quit']
-	
+		self.choice_keys = ['play', 'tutorial', 'options', 'credits', 'quit']
+		
 	def process_input(self, events):
 		for event in events:
 			if event.down:
