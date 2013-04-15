@@ -1,6 +1,12 @@
 import pygame
 import os
 
+_sound_id_to_file = {
+	'incorrect_order': None,
+	'cant_drop_box': None,
+	'money_sound': None
+}
+
 _images = {}
 def get_image(path):
 	img = _images.get(path, None)
@@ -32,9 +38,6 @@ def trim(string):
 	while len(string) > 0 and string[-1] in ' \r\n\t':
 		string = string[:-1]
 	return string
-
-_sound_id_to_file = {
-}
 
 # does a lookup between id's and the actual file name
 def play_sound(id):
@@ -95,4 +98,16 @@ def get_text(text):
 			x += char.get_width()
 		_text_cache[text] = img
 	return img
-			
+
+def format_money(amount):
+	if amount == 0:
+		return "$0.00"
+	s = str(amount)
+	output = []
+	while len(s) > 0:
+		t = s[-3:]
+		s = s[:-3]
+		output = [t] + output
+	
+	output = ','.join(output)
+	return '$' + output + '.00'

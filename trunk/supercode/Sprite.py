@@ -10,7 +10,7 @@ HERO_COUNTER_LEFT = (HERO_DOOR[0] - 1, HERO_DOOR[1] - 4)
 VILLAIN_DOOR = (3, 14)
 VILLAIN_COUNTER_LEFT = (VILLAIN_DOOR[0] - 1, VILLAIN_DOOR[1] - 4)
 
-SIDEWAYS_Y = HERO_DOOR[1] - 2
+SIDEWAYS_Y = HERO_DOOR[1] - 1.5
 
 class Sprite:
 	def __init__(self, key, is_hero=False, demands=[], target=None):
