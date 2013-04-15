@@ -3,6 +3,7 @@
 import random
 
 from supercode.Box import *
+from supercode.NewProductsMenu import *
 from supercode.PriceMenu import *
 from supercode.Session import *
 from supercode.Sprite import *
@@ -80,7 +81,7 @@ class PlayScene:
 		self.player = Sprite('player')
 		self.player = Sprite('player')
 		self.sprites = [self.player]
-		
+		self.last_color = None
 		self.sprites_by_row = None
 		
 		# Forgive me father for I am about to sin.
@@ -275,6 +276,10 @@ class PlayScene:
 			
 	def update(self, counter):
 		self.session.update()
+		c = self.session.get_last_available_color()
+		if c != self.last_color:
+			self.last_color = c
+			self.next = NewProductsMenu(self, c)
 		customer = self.session.check_for_customer()
 		
 		if customer != None:
@@ -346,6 +351,8 @@ class PlayScene:
 						icon_y += 54
 		
 		self.draw_budget_bar(screen)
+		
+		screen.blit(get_image('misc/radio'), (529, 615))
 	
 	def draw_budget_bar(self, screen):
 		screen.blit(get_image('misc/budget_bar'), (10, 10))
@@ -354,7 +361,7 @@ class PlayScene:
 				
 					
 	def render1(self, screen, rcounter):
-		screen.fill((0, 0, 0))
+		screen.fill((100, 180, 255))
 		self.render_room(screen, (27, 45), rcounter)
 
 	def render_room(self, screen, roomtopleft, rcounter):
