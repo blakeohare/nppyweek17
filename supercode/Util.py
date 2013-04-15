@@ -80,8 +80,9 @@ def min(a, b):
 	return b
 
 _text_cache = {}
-def get_text(text):
-	img = _text_cache.get(text)
+def get_text(text, small=False):
+	key = str(small)[0] + text
+	img = _text_cache.get(key)
 	if img == None:
 		letters = []
 		width = 0
@@ -96,12 +97,19 @@ def get_text(text):
 		for char in letters:
 			img.blit(char, (x, 0))
 			x += char.get_width()
-		_text_cache[text] = img
+		if small:
+			img = pygame.transform.scale(img, (img.get_width() // 2, img.get_height() // 2))
+		_text_cache[key] = img
 	return img
 
-def format_money(amount):
+def get_small_text(text):
+	return get_text(text, True)
+
+def format_money(amount, use_cents=True):
 	if amount == 0:
-		return "$0.00"
+		if use_cents:
+			return "$0.00"
+		return "$0"
 	s = str(amount)
 	output = []
 	while len(s) > 0:
@@ -109,5 +117,7 @@ def format_money(amount):
 		s = s[:-3]
 		output = [t] + output
 	
-	output = ','.join(output)
-	return '$' + output + '.00'
+	output = '$' + ','.join(output)
+	if use_cents:
+		output += '.00'
+	return output
