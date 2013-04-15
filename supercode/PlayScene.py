@@ -402,7 +402,7 @@ class PlayScene:
 			for sprite in self.sprites_by_row[row]:
 				sprite.render(screen, left, top, rcounter)
 				if sprite.holding != None:
-					i = 4
+					i = 4.7
 					for box in sprite.holding:
 						box.render(screen, left, top, sprite.x, sprite.y, i)
 						i += 1

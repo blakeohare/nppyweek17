@@ -1,4 +1,4 @@
-player:3
+player:4
 joker:3
 batman:3
 riddler:3
