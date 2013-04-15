@@ -144,8 +144,14 @@ class PlayScene:
 		storage_height = 5
 		
 		box = Box(key)
-		x = storage_left + int(random.random() * storage_width)
-		y = storage_top + int(random.random() * storage_height)
+		while True:
+			x = storage_left + int(random.random() * storage_width)
+			y = storage_top + int(random.random() * storage_height)
+			dx = abs(x - self.player.x)
+			dy = abs(y - self.player.y)
+			if dx > 2 or dy > 2:
+				break
+		
 		tile = self.grid[x][y]
 		if tile.stack == None:
 			tile.stack = []
