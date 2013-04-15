@@ -27,6 +27,10 @@ class Session:
 				self.prices[key] = STARTING_ITEM_PRICE
 		
 	
+	def item_sold(self, sprite, item):
+		self.budget += self.prices[item]
+		
+	
 	def get_random_box(self, is_free):
 		# TODO: this function should weight itself on stuff
 		color = random.choice(all_colors[:self.spectrum_available])
@@ -60,7 +64,7 @@ class Session:
 		
 		key = random.choice(list)
 		
-		sprite = Sprite(key, is_hero, ['n_blue'])
+		sprite = Sprite(key, is_hero, ['n_blue', 'h_red' if is_hero else 'v_red'])
 		
 		return sprite
 	

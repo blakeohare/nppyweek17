@@ -62,7 +62,7 @@ class Tile:
 		self.stack = None
 		data = _tile_info_lookup[key]
 		self.passable = data[1]
-		self.is_counter = key in ('ct', 'cb', 'tl', 'tr', 'bl', 'br')
+		self.is_counter = False
 		if data[0] == None:
 			self.image = None
 		else:
@@ -119,6 +119,16 @@ class PlayScene:
 			
 		self.grid = cols
 		
+		for i in range(5):
+			v = self.grid[1 + i][8]
+			h = self.grid[21 + i][8]
+			v.is_counter = True
+			h.is_counter = True
+			v.counter_slot = i
+			h.counter_slot = i
+			v.counter_is_hero = False
+			h.counter_is_hero = True
+		
 		self.player.x = 14.5
 		self.player.y = 12.5
 		
@@ -152,6 +162,10 @@ class PlayScene:
 				tile.stack = []
 			tile.stack.append(b)
 	
+	def incorrect_order(self):
+		play_sound("incorrect_order")
+		pass
+	
 	def lift(self, is_full):
 		dxdy = _direction_to_vector[self.player.direction]
 		x = int(self.player.x) + dxdy[0]
@@ -159,7 +173,7 @@ class PlayScene:
 		tile = self.grid[x][y]
 		
 		if self.player.holding == None:
-			if tile.stack != None:
+			if tile.stack != None and not tile.is_counter:
 				if is_full:
 					self.player.holding = tile.stack
 					tile.stack = None
@@ -174,22 +188,52 @@ class PlayScene:
 			if not tile.passable and not tile.is_counter:
 				play_sound('cant_drop_box')
 				return
-				
+			
+			to_drop = []
+			
+			if is_full:
+				to_drop = self.player.holding[:]
+			else:
+				to_drop = self.player.holding[:1]
+			
+			item_sold = False
+			
+			if tile.is_counter:
+				for sprite in self.sprites:
+					if sprite.phase == 4:
+						if sprite.counter_slot == tile.counter_slot:
+							if sprite.is_hero == tile.counter_is_hero:
+								for item_to_drop in to_drop:
+									found = False
+									for d in sprite.demands:
+										if d == item_to_drop.key:
+											found = True
+											break
+									if not found:
+										self.incorrect_order()
+										return
+								self.session.item_sold(sprite, item_to_drop.key)
+								item_sold = True
+								break
+			
+			if item_sold:
+				play_sound('money_sound')
+			
 			if tile.stack == None:
 				fix_loc = True
 				tile.stack = []
 			
 			if is_full:
-				tile.stack += self.player.holding
+				for item in self.player.holding:
+					tile.stack.append(item)
 				self.player.holding = None
 			else:
-				a = self.player.holding[0]
-				tile.stack.append(a)
+				tile.stack.append(self.player.holding[0])
 				if len(self.player.holding) == 1:
 					self.player.holding = None
 				else:
 					self.player.holding = self.player.holding[1:]
-		
+			
 			# player could possibly set a box down and then be standing in an invalid position
 			# nudge the player closer to the center of his tile to prevent this invalid state
 			if fix_loc:
@@ -206,7 +250,7 @@ class PlayScene:
 					if attempts == 0: # my paranoia of some bug causing an infinite loop here
 						self.player.x = int(self.player.x) + 0.5
 						self.player.y = int(self.player.y) + 0.5
-	
+
 	def process_input(self, events, pressed_keys):
 		for event in events:
 			if event.down:
@@ -300,7 +344,7 @@ class PlayScene:
 					
 		
 		screen.blit(get_image('misc/budget_bar'), (10, 10))
-		screen.blit(get_text("Budget: $1,000.00"), (30, 30))
+		screen.blit(get_text("Budget: " + format_money(self.session.budget)), (30, 30))
 					
 					
 	def render1(self, screen, rcounter):
