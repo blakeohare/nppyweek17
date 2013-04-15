@@ -136,6 +136,20 @@ class PlayScene:
 		self.player.y = 12.5
 		
 		self.set_up_boxes(10)
+
+	def place_box(self, key):
+		storage_left = 11
+		storage_width = 5
+		storage_top = 2
+		storage_height = 5
+		
+		box = Box(key)
+		x = storage_left + int(random.random() * storage_width)
+		y = storage_top + int(random.random() * storage_height)
+		tile = self.grid[x][y]
+		if tile.stack == None:
+			tile.stack = []
+		tile.stack.append(box)
 	
 	def create_random_boxes(self, count):
 		storage_left = 11
@@ -279,6 +293,11 @@ class PlayScene:
 			
 	def update(self, counter):
 		self.session.update()
+		if counter % 10 == 0:
+			r = self.session.pop_restocking()
+			if r != None:
+				self.place_box(r)
+				
 		c = self.session.get_last_available_color()
 		if c != self.last_color:
 			self.last_color = c

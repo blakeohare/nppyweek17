@@ -7,6 +7,7 @@ class OrderStuffMenu:
 		self.next = self
 		self.cache = None
 		self.close_plot = None
+		self.plots = []
 	
 	def update(self, counter):
 		pass
@@ -18,6 +19,12 @@ class OrderStuffMenu:
 					if is_over_plot(self.close_plot):
 						self.next = self.bg
 						self.bg.next = self.bg
+					elif self.plots != None:
+						for plot in self.plots:
+							if is_over_plot(plot):
+								self.next = self.bg
+								self.bg.next = self.bg
+								self.bg.session.order_more(plot[4])
 	
 	def render1(self, screen, counter):
 		self.bg.render1(screen, counter)
@@ -41,23 +48,27 @@ class OrderStuffMenu:
 			line2 = get_text("Items per palette: 15 ($750)")
 			line3 = get_small_text("(5 hero, 5 villain, 5 neutral)")
 			
-			lines = [line1, line2, line3]
+			lines = [line1, line2, line3, get_small_text(' '), get_text("ORDER:")]
 			
 			x = 35
 			y = 28
 			for line in lines:
 				cache.blit(line, (x, y))
 				y += line.get_height() + 20
-			
+			plots = []
 			i = 0
-			for color in ALL_COLORS[:self.bg.session.spectrum_available]:
-				
+			for color in [:self.bg.session.spectrum_available]:
+				px = i * 64 + 45
 				j = 0
 				for prefix in 'vhn':
 					img = get_image('boxes/' + prefix + "_" + color)
-					cache.blit(img, (i * 30 + 35, y + 30 - j * 8))
+					py = y + 30 - j * 8
+					cache.blit(img, (px + 12, py + 11))
 					j += 1
 				i += 1
+				
+				plots.append((px + _LEFT, py + _TOP, 40, 60, color))
+			self.plots = plots
 				
 			
 			self.cache = cache
@@ -68,4 +79,9 @@ class OrderStuffMenu:
 		if is_over_plot(self.close_plot):
 			for candy in 'yum':
 				screen.blit(get_image('misc/close_button'), self.close_plot[:2])
+		else:
+			for plot in self.plots:
+				if is_over_plot(plot):
+					pygame.draw.rect(screen, (128, 128, 128), pygame.Rect(plot[0], plot[1], plot[2], plot[3]), 2)
+					break
 				

@@ -21,7 +21,7 @@ class Session:
 		self.reputation = 1.0
 		self.budget = STARTING_BUDGET
 		self.spectrum_available = 1
-		
+		self.restocking = []
 		self.prices = {}
 		for color in all_colors:
 			for polarity in polarities:
@@ -31,7 +31,21 @@ class Session:
 	
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
-		
+	
+	def pop_restocking(self):
+		if len(self.restocking) > 0:
+			t = self.restocking[0]
+			self.restocking = self.restocking[1:]
+			return t
+		return None
+	
+	def order_more(self, color):
+		# TODO: check to make sure you have enough funds
+		self.budget -= 750
+		for i in range(5):
+			for p in 'hvn':
+				self.restocking.append(p + '_' + color)
+		random.shuffle(self.restocking)
 	
 	def get_last_available_color(self):
 		t = int(self.budget // 1000)
