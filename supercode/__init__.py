@@ -32,6 +32,16 @@ def startgame():
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				return
+			elif e.type == pygame.MOUSEBUTTONDOWN or e.type == pygame.MOUSEBUTTONUP:
+				down = e.type == pygame.MOUSEBUTTONDOWN
+				action = None
+				if e.button == 1:
+					action = 'lclick'
+				elif e.button == 3:
+					action = 'rclick'
+				
+				events.append(MyEvent(action, down))
+				
 			elif e.type == pygame.KEYDOWN or e.type == pygame.KEYUP:
 				down = e.type == pygame.KEYDOWN
 				action = None

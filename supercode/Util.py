@@ -79,6 +79,12 @@ def min(a, b):
 	if a < b: return a
 	return b
 
+def mouse_x():
+	return pygame.mouse.get_pos()[0]
+
+def mouse_y():
+	return pygame.mouse.get_pos()[1]
+
 _text_cache = {}
 def get_text(text, small=False):
 	key = str(small)[0] + text
@@ -99,6 +105,7 @@ def get_text(text, small=False):
 			x += char.get_width()
 		if small:
 			img = pygame.transform.scale(img, (img.get_width() // 2, img.get_height() // 2))
+			img.blit(img, (0, 0))
 		_text_cache[key] = img
 	return img
 
