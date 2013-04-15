@@ -3,7 +3,9 @@ import random
 from supercode.Box import *
 from supercode.Sprite import *
 
-all_colors = 'blue red orange yellow lime green aqua purple pink brown'.split()
+all_colors = 'red orange yellow lime green aqua blue purple pink brown'.split()
+ALL_COLORS = all_colors # yeah, I'm too lazy to rename all instances of all_colors
+
 polarities = 'h v n'.split()
 
 STARTING_BUDGET = 1000
@@ -18,7 +20,7 @@ class Session:
 		self.balance = 0.5
 		self.reputation = 1.0
 		self.budget = STARTING_BUDGET
-		self.spectrum_available = 2
+		self.spectrum_available = 1
 		
 		self.prices = {}
 		for color in all_colors:
@@ -30,6 +32,9 @@ class Session:
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
 		
+	
+	def get_last_available_color(self):
+		return ALL_COLORS[self.spectrum_available - 1]
 	
 	def get_random_box(self, is_free):
 		# TODO: this function should weight itself on stuff
@@ -64,7 +69,25 @@ class Session:
 		
 		key = random.choice(list)
 		
-		sprite = Sprite(key, is_hero, ['n_blue', 'h_red' if is_hero else 'v_red'])
+		available_colors = ALL_COLORS[:self.spectrum_available]
+		
+		demands = []
+		
+		demand_count = 2
+		while demand_count > 0:
+			color = random.choice(available_colors)
+			neutral = random.random() < .5
+			if not neutral:
+				if is_hero:
+					k = 'h_' + color
+				else:
+					k = 'v_' + color
+			else:
+				k = 'n_' + color
+			demands.append(k)
+			demand_count -= 1
+		
+		sprite = Sprite(key, is_hero, demands)
 		
 		return sprite
 	

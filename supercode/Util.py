@@ -51,7 +51,24 @@ _letter_lookup = {
 	'$': 'dollar',
 	'!': 'excl',
 	'.': 'period',
-	'?': 'ques'
+	'?': 'ques',
+	"'": 'apostrophe',
+	'"': 'quote',
+	'-': 'hyphen',
+	'<': 'lessthan',
+	'>': 'greaterthan',
+	'*': 'asterisk',
+	'@': 'at',
+	'=': 'equals',
+	'_': 'underscore',
+	'#': 'hash',
+	'^': 'caret',
+	'(': 'openparen',
+	')': 'closeparen',
+	'%': 'percent',
+	'+': 'plus',
+	';': 'semicolon',
+	'/': 'slash'
 }
 for c in 'abcdefghijklmnopqrstuvwxyz':
 	_letter_lookup[c] = c
@@ -128,3 +145,20 @@ def format_money(amount, use_cents=True):
 	if use_cents:
 		output += '.00'
 	return output
+
+
+def is_over_plot(plot):
+	if plot == None: return False
+	mx = mouse_x()
+	my = mouse_y()
+	if mx >= plot[0] and my >= plot[1]:
+		if mx <= plot[0] + plot[2]:
+			if my <= plot[1] + plot[3]:
+				return True
+	return False
+
+def get_arrow(direction, is_blinking, counter):
+	if not is_blinking or (((counter // 3) % 2) == 0):
+		return get_image('misc/' + direction + '_arrow_small')
+	return get_image('misc/' + direction + '_arrow')
+	
