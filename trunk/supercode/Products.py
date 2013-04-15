@@ -56,6 +56,6 @@ def get_product(key):
 		description = output[1:]
 	else:
 		title = "Untitled Product"
-		description = "Please add a description in Products.py"
+		description = ["Please add a description in Products.py"]
 	
 	return (title, description)
