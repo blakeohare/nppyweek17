@@ -21,6 +21,9 @@ def get_image(path):
 		canonical_path = canonical_path.replace('/', os.sep).replace('\\', os.sep)
 		
 		img = pygame.image.load(canonical_path)
+		
+		if canonical_path.startswith('images/tiles/') and not ('walltop' in canonical_path):
+			img = img.convert()
 		_images[path] = img
 		_images[canonical_path] = img
 	return img
