@@ -4,6 +4,7 @@ import random
 
 from supercode.Box import *
 from supercode.NewProductsMenu import *
+from supercode.OrderStuffMenu import *
 from supercode.PriceMenu import *
 from supercode.Session import *
 from supercode.Sprite import *
@@ -260,6 +261,8 @@ class PlayScene:
 					self.lift(event.action == 'full')
 				elif event.action == 'menu':
 					self.next = PriceMenu(self)
+				elif event.action == 'order':
+					self.next = OrderStuffMenu(self)
 		
 		v = 1.3
 		dx = 0

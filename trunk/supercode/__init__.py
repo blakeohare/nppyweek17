@@ -66,6 +66,8 @@ def startgame():
 					action = 'lift'
 				elif e.key == pygame.K_r:
 					action = 'menu'
+				elif e.key == pygame.K_t:
+					action = 'order'
 				
 				if action != None:
 					events.append(MyEvent(action, down))
