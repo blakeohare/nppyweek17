@@ -222,20 +222,31 @@ class Sprite:
 	
 	
 	def render(self, screen, offsetx, offsety, counter):
+		hold = 'hold_' if self.holding else ''
+		
+		#TODO: remove this when the other characters are checked in with hold images
+		if self.key != 'player':
+			hold = ''
+		
+		
 		if self.walking:
 			file = ''.join([
 				'sprites/',
 				self.key,
-				'_walking_',
+				'_',
+				hold,
+				'walking_',
 				self.direction,
 				'_',
-				str((counter // 2) % self.max_walk + 1),
+				str((counter // 4) % self.max_walk + 1),
 				'.png'])
 		else:
 			file = ''.join([
 				'sprites/',
 				self.key,
-				'_standing_',
+				'_',
+				hold,
+				'standing_',
 				self.direction,
 				'.png'])
 		img = get_image(file)
