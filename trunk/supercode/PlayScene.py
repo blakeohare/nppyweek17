@@ -351,8 +351,42 @@ class PlayScene:
 						icon_y += 54
 		
 		self.draw_budget_bar(screen)
+		self.draw_power_balance(screen)
+		self.draw_options(screen)
 		
 		screen.blit(get_image('misc/radio'), (529, 615))
+	
+	def draw_options(self, screen):
+		
+		prices = get_small_text("Adjust prices (R)")
+		order_more = get_small_text("Restock (T)")
+		cloud = get_image('misc/thought_cloud')
+		x = screen.get_width() - cloud.get_width() - 20
+		y = 0
+		screen.blit(cloud, (x, y))
+		screen.blit(prices, (x + 73, y + 40))
+		screen.blit(order_more, (x + 73, y + 70))
+		
+	
+	def draw_power_balance(self, screen):
+		left = 416
+		top = 564
+		text = get_small_text("Power Balance")
+		screen.blit(text, (left, top))
+		
+		width = 220
+		y = top + text.get_height() + 10
+		x = left + text.get_width() // 2 - width // 2
+		
+		evil = int(self.session.balance * width)
+		good = width - evil
+		height = 20
+		border = 3
+		pygame.draw.rect(screen, (123, 123, 123), pygame.Rect(x - border, y - border, width + border * 2, height + border * 2))
+		pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x, y, evil, height))
+		x += evil
+		pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(x, y, good, height))
+		
 	
 	def draw_budget_bar(self, screen):
 		screen.blit(get_image('misc/budget_bar'), (10, 10))

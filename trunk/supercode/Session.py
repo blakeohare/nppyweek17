@@ -34,6 +34,9 @@ class Session:
 		
 	
 	def get_last_available_color(self):
+		t = int(self.budget // 1000)
+		if t > self.spectrum_available and t < len(ALL_COLORS):
+			self.spectrum_available += 1
 		return ALL_COLORS[self.spectrum_available - 1]
 	
 	def get_random_box(self, is_free):
