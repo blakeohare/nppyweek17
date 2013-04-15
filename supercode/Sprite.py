@@ -139,11 +139,12 @@ class Sprite:
 			
 			if tile.stack != None:
 				for item in tile.stack:
-					if item.key in self.demands:
+					if not item.accounted and item.key in self.demands:
 						i = 0
 						while i < len(self.demands):
 							if self.demands[i] == item.key:
 								self.demands = self.demands[:i] + self.demands[i + 1:]
+								item.accounted = True
 								break
 							i += 1
 							

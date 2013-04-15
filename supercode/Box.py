@@ -4,6 +4,7 @@ class Box:
 	def __init__(self, key):
 		self.key = key
 		self.img = get_image('boxes/' + key)
+		self.accounted = False
 	
 	def render(self, screen, left, top, game_x, game_y, height):
 		x = int(left + game_x * 16 - 8)
