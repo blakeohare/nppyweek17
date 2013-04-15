@@ -25,7 +25,12 @@ class PriceMenu:
 				if click != 0:
 					plot = self.get_plot()
 					if plot != None:
-						self.modify_price(plot[4], click)
+						key = plot[4]
+						if key == 'exit':
+							self.next = self.bg
+							self.bg.next = self.bg
+						else:
+							self.modify_price(key, click)
 						
 			if event.down and event.action == 'full':
 				self.next = self.bg
@@ -71,6 +76,12 @@ class PriceMenu:
 			spacing_y = 80
 			
 			prices = self.bg.session.prices
+			
+			exit = get_text("Close")
+			x = self.render_cache.get_width() - exit.get_width() - 30
+			y = 30
+			self.render_cache.blit(exit, (x, y))
+			self.plots.append((x - 6, y - 6, exit.get_width() + 12, exit.get_height() + 12, 'exit'))
 			
 			x = left + margin_left
 			for color in 'all x red orange yellow lime green aqua blue purple pink brown'.split():
