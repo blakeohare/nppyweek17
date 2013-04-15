@@ -39,11 +39,17 @@ class Session:
 			return t
 		return None
 	
-	def order_more(self, color):
+	def order_more(self, color, free=False):
 		# TODO: check to make sure you have enough funds
-		self.budget -= 750
-		for i in range(5):
-			for p in 'hvn':
+		
+		if not free:
+			self.budget -= 750
+		
+		for p in 'hvn':
+			x = 4
+			if p == 'n':
+				x = 7
+			for i in range(x):		
 				self.restocking.append(p + '_' + color)
 		random.shuffle(self.restocking)
 	
@@ -90,7 +96,7 @@ class Session:
 		
 		demands = []
 		
-		demand_count = 2
+		demand_count = int(random.random() * 3) + 1
 		while demand_count > 0:
 			color = random.choice(available_colors)
 			neutral = random.random() < .5

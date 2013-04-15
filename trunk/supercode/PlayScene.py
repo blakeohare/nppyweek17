@@ -135,7 +135,8 @@ class PlayScene:
 		self.player.x = 14.5
 		self.player.y = 12.5
 		
-		self.set_up_boxes(10)
+		#self.set_up_boxes(10)
+		self.session.order_more('red', True)
 
 	def place_box(self, key):
 		storage_left = 11
@@ -226,12 +227,17 @@ class PlayScene:
 					if sprite.phase == 4:
 						if sprite.counter_slot == tile.counter_slot:
 							if sprite.is_hero == tile.counter_is_hero:
+								sprite_demands = sprite.demands[:]
 								for item_to_drop in to_drop:
 									found = False
-									for d in sprite.demands:
+									i = 0
+									while i < len(sprite_demands):
+										d = sprite_demands[i]
 										if d == item_to_drop.key:
 											found = True
+											sprite_demands = sprite_demands[:i] + sprite_demands[i + 1:]
 											break
+										i += 1
 									if not found:
 										self.incorrect_order()
 										return
@@ -241,6 +247,9 @@ class PlayScene:
 			
 			if item_sold:
 				play_sound('money_sound')
+			elif tile.is_counter:
+				# can't drop a box on a counter without selling it
+				return
 			
 			if tile.stack == None:
 				fix_loc = True
@@ -359,6 +368,7 @@ class PlayScene:
 			x_coords[4] + t + 52
 		]
 		hero_offset = 621
+		spacing = 40
 		for sprite in self.sprites:
 			if sprite != self.player:
 				if sprite.phase == 4:
@@ -372,11 +382,11 @@ class PlayScene:
 					
 					img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
 					screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
-					height = len(sprite.demands) * 54
+					height = len(sprite.demands) * spacing
 					icon_y = 620 - height // 2
 					for d in sprite.demands:
 						screen.blit(get_image('boxes/' + d), (icon_x[slot] + offset, icon_y))
-						icon_y += 54
+						icon_y += spacing
 		
 		self.draw_budget_bar(screen)
 		self.draw_power_balance(screen)
