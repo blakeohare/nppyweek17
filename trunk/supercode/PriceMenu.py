@@ -1,5 +1,7 @@
 import pygame
 
+from supercode.Util import *
+
 class PriceMenu:
 	def __init__(self, bg):
 		self.next = self
@@ -11,7 +13,6 @@ class PriceMenu:
 				self.next = self.bg
 				self.bg.next = self.bg
 				
-	
 	def update(self, counter):
 		self.bg.update(counter)
 	
@@ -21,5 +22,6 @@ class PriceMenu:
 	def render2(self, screen, counter):
 		self.bg.render2(screen, counter)
 		
-		pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(20, 20, 20, 20))
+		#pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(20, 20, 20, 20))
+		screen.blit(get_image('misc/price_menu_bg'), (122, 152))
 	
