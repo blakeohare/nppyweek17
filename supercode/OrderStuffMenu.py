@@ -57,7 +57,7 @@ class OrderStuffMenu:
 				y += line.get_height() + 20
 			plots = []
 			i = 0
-			for color in [:self.bg.session.spectrum_available]:
+			for color in ALL_COLORS[:self.bg.session.spectrum_available]:
 				px = i * 64 + 45
 				j = 0
 				for prefix in 'vhn':
