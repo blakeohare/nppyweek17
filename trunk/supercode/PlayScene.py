@@ -3,6 +3,7 @@
 import random
 
 from supercode.Box import *
+from supercode.PriceMenu import *
 from supercode.Session import *
 from supercode.Sprite import *
 from supercode.Util import *
@@ -256,6 +257,8 @@ class PlayScene:
 			if event.down:
 				if event.action == 'full' or event.action == 'single':
 					self.lift(event.action == 'full')
+				elif event.action == 'menu':
+					self.next = PriceMenu(self)
 		
 		v = 1.3
 		dx = 0
@@ -341,11 +344,14 @@ class PlayScene:
 					for d in sprite.demands:
 						screen.blit(get_image('boxes/' + d), (icon_x[slot] + offset, icon_y))
 						icon_y += 54
-					
 		
+		self.draw_budget_bar()
+	
+	def draw_budget_bar(self):
 		screen.blit(get_image('misc/budget_bar'), (10, 10))
-		screen.blit(get_text("Budget: " + format_money(self.session.budget)), (30, 30))
-					
+		screen.blit(get_text("Budget: " + format_money(self.session.budget)), (30, 38))
+		
+				
 					
 	def render1(self, screen, rcounter):
 		screen.fill((0, 0, 0))

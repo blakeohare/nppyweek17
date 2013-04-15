@@ -54,8 +54,11 @@ def startgame():
 					action = 'full'
 				elif e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
 					action = 'lift'
+				elif e.key == pygame.K_r:
+					action = 'menu'
 				
-				events.append(MyEvent(action, down))
+				if action != None:
+					events.append(MyEvent(action, down))
 		
 		for event in events:
 			pressed_keys[event.action] = event.down
