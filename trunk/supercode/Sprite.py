@@ -100,7 +100,8 @@ class Sprite:
 				self.phase = 2
 				self._p_origin = self.x
 			else:
-				self.dy = -1
+				self.try_move(0, -1)
+				#self.dy = -1
 				return
 		
 		# walk sideways to your self.counter_slot
@@ -112,13 +113,15 @@ class Sprite:
 				if self.x >= target:
 					self.phase = 3
 				else:
-					self.dx = 1
+					self.try_move(1, 0)
+					#self.dx = 1
 					return
 			elif self._p_origin > target: # walk left
 				if self.x <= target:
 					self.phase = 3
 				else:
-					self.dx = -1
+					self.try_move(-1, 0)
+					#self.dx = -1
 					return
 		
 		# walk up to the counter
@@ -127,12 +130,13 @@ class Sprite:
 			if self.y <= go_to_y:
 				self.phase = 4
 			else:
-				self.dy = -1
+				#self.dy = -1
+				self.try_move(0, -1)
 				return
 		
 		# wait until you have your order
 		if self.phase == 4:
-			
+			self.try_move(0, 0)
 			cx = int(self.x)
 			cy = int(counter_y - 2)
 			tile = grid[cx][cy]
@@ -159,7 +163,8 @@ class Sprite:
 		# walk down until you hit sideways_y
 		if self.phase == 5:
 			if self.y < SIDEWAYS_Y:
-				self.dy = 1
+				self.try_move(0, 1)
+				#self.dy = 1
 				return
 			else:
 				self.phase = 6
@@ -174,19 +179,22 @@ class Sprite:
 				if self.x >= door[0]:
 					self.phase = 7
 				else:
-					self.dx = 1
+					#self.dx = 1
+					self.try_move(1, 0)
 					return
 			elif self._p_origin > target: # walk left to door point
 				if self.x <= door[0]:
 					self.phase = 7
 				else:
-					self.dx = -1
+					#self.dx = -1
+					self.try_move(-1, 0)
 					return
 		
 		# walk down until you hit the door, then kill yourself
 		if self.phase == 7:
 			if self.y < door[1]:
-				self.dy = 1
+				#self.dy = 1
+				self.try_move(0, 1)
 				return
 			else:
 				self.destroy_me = True
