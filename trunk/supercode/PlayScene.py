@@ -317,28 +317,29 @@ class PlayScene:
 		if c != self.last_color:
 			self.last_color = c
 			self.next = NewProductsMenu(self, c)
-		customer = self.session.check_for_customer()
+		customers = self.session.check_for_customers()
 		
-		if customer != None:
-			is_hero = customer.is_hero
-			taken = {}
-			for i in range(5):
-				taken[i] = False
-			for sprite in self.sprites:
-				if sprite != self.player and sprite.is_hero == is_hero:
-					taken[sprite.counter_slot] = True
-			open = []
-			for k in taken.keys():
-				if not taken[k]:
-					open.append(k)
-			random.shuffle(open)
-			
-			if (len(open) > 0):
-				customer.set_counter_slot(open[0])
-				self.sprites.append(customer)
-			else:
-				# counter full. reject customer
-				self.session.reject_last_customer()
+		if customers != None:
+			for customer in customers:
+				is_hero = customer.is_hero
+				taken = {}
+				for i in range(5):
+					taken[i] = False
+				for sprite in self.sprites:
+					if sprite != self.player and sprite.is_hero == is_hero:
+						taken[sprite.counter_slot] = True
+				open = []
+				for k in taken.keys():
+					if not taken[k]:
+						open.append(k)
+				random.shuffle(open)
+				
+				if (len(open) > 0):
+					customer.set_counter_slot(open[0])
+					self.sprites.append(customer)
+				else:
+					# counter full. reject customer
+					self.session.reject_last_customer()
 		
 		for sprite in self.sprites:
 			if sprite != self.player:
