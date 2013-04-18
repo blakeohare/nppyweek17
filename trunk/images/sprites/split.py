@@ -2,7 +2,7 @@ import pygame
 import os
 
 pygame.init()
-characters = 'player'.split()
+characters = 'player villain1 hero1 villain2'.split()
 
 for character in characters:
 	img = pygame.image.load(character + '.png')
