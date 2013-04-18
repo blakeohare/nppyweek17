@@ -11,8 +11,8 @@ polarities = 'h v n'.split()
 STARTING_BUDGET = 1000
 STARTING_ITEM_PRICE = 100
 
-HEROES = 'superman batman'.split()
-VILLAINS = 'joker riddler'.split()
+HEROES = 'superman hero1'.split()
+VILLAINS = 'villain1 villain2'.split()
 
 class Session:
 	def __init__(self):
