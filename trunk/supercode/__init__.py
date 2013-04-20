@@ -6,6 +6,8 @@ import random
 
 from supercode.TitleScene import TitleScene
 
+SHOW_FPS = True
+
 class MyEvent:
 	def __init__(self, action, down):
 		self.action = action
@@ -94,6 +96,15 @@ def startgame():
 		end = time.time()
 		
 		diff = end - start
+		
+		
+		if SHOW_FPS:
+			if diff == 0:
+				vfps = "Fast"
+			else:
+				vfps = str(int(1.0 / diff))
+			
+			pygame.display.set_caption("FPS: " + vfps)
 		
 		delay = 1.0 / fps - diff
 		if delay > 0:
