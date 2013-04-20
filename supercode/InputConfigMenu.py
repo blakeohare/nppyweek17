@@ -49,6 +49,9 @@ class InputConfigMenu:
 		plot = self.get_plot()
 		for event in events:
 			if event.down:
+				if event.action == 'pause':
+					from supercode.TitleScene import TitleScene
+					self.next = TitleScene()
 				if event.action == 'lclick':
 					if plot != None:
 						if plot == 'exit':

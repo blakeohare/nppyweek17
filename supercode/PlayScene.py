@@ -4,6 +4,7 @@ import random
 
 from supercode.Box import *
 from supercode.DefeatScene import *
+from supercode.InputConfigMenu import *
 from supercode.JukeBox import *
 from supercode.NewProductsMenu import *
 from supercode.OrderStuffMenu import *
