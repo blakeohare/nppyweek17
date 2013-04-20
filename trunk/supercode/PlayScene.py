@@ -219,6 +219,7 @@ class PlayScene:
 						tile.stack = None
 					else:
 						tile.stack = tile.stack[:-1]
+				play_sound('lift')
 		else:
 			fix_loc = False
 			if not tile.passable and not tile.is_counter:
@@ -262,7 +263,8 @@ class PlayScene:
 			elif tile.is_counter:
 				# can't drop a box on a counter without selling it
 				return
-			
+			else:
+				play_sound('drop')
 			if tile.stack == None:
 				fix_loc = True
 				tile.stack = []
