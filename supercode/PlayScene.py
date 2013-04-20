@@ -13,6 +13,9 @@ from supercode.Session import *
 from supercode.Sprite import *
 from supercode.Util import *
 
+_LEFT = 27
+_TOP = 45
+
 _direction_to_vector = {
 	'left': (-1, 0),
 	'right': (1, 0),
@@ -373,40 +376,24 @@ class PlayScene:
 		self.sprites = new_sprites
 	
 	def render2(self, screen, counter):
-		x_coords = [
-			0,
-			75,
-			149,
-			201,
-			243
-		]
-		t = 30
-		icon_x = [
-			x_coords[0] + t + 6,
-			x_coords[1] + t + 6,
-			x_coords[2] + t + 6,
-			x_coords[3] + t + 28,
-			x_coords[4] + t + 52
-		]
-		hero_offset = 621
-		spacing = 40
+		_LEFT2 = _LEFT * 2
+		_TOP2 = _TOP * 2
+		spacing = 28
 		for sprite in self.sprites:
 			if sprite != self.player:
 				if sprite.phase == 4:
 					slot = sprite.counter_slot
-					demand_x = 8 + x_coords[slot]
-					offset = 0
-					if sprite.is_hero:
-						offset = hero_offset
-					demand_x += offset
+					demand_x = int(16 * sprite.x - 8) * 2 - 2 + _LEFT2
+					demand_y = int(16 * sprite.y) * 2 + _TOP2
 					
-					
-					img = get_image('misc/demand_' + str(sprite.counter_slot + 1))
-					screen.blit(img, (demand_x, screen.get_height() - img.get_height() - 20))
-					height = len(sprite.demands) * spacing
-					icon_y = 620 - height // 2
-					for d in sprite.demands:
-						screen.blit(get_image('boxes/' + d), (icon_x[slot] + offset, icon_y))
+					img = get_image('misc/demand_bubble')
+					screen.blit(img, (demand_x, demand_y))
+					demands = sprite.demands
+					height = len(demands) * spacing
+					icon_y = demand_y + img.get_height() // 2 - height // 2 - 30 + 2 + spacing * 3 // 2
+					icon_x = demand_x + 8 + 2
+					for d in demands:
+						screen.blit(get_image('boxes/' + d), (icon_x, icon_y))
 						icon_y += spacing
 		
 		self.draw_budget_bar(screen)
@@ -455,7 +442,7 @@ class PlayScene:
 					
 	def render1(self, screen, rcounter):
 		screen.fill((100, 180, 255))
-		self.render_room(screen, (27, 45), rcounter)
+		self.render_room(screen, (_LEFT, _TOP), rcounter)
 
 	def render_room(self, screen, roomtopleft, rcounter):
 		rows = len(self.grid[0])
