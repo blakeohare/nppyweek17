@@ -1,4 +1,4 @@
-#import pygame # it'd be cool if I could leave this commented out
+import pygame
 
 import random
 
@@ -395,6 +395,20 @@ class PlayScene:
 					for d in demands:
 						screen.blit(get_image('boxes/' + d), (icon_x, icon_y))
 						icon_y += spacing
+					
+					gbarx = demand_x + 4
+					gbary = demand_y + img.get_height() + 8
+					gbarw = img.get_width() - 8
+					percent= 1.0 * sprite.gruntles / STARTING_GRUNTLES_COUNT
+					gbarw0 = max(1, int(gbarw * percent))
+					gbarh = 3
+					
+					if percent < 0.3: color = (255, 0, 0)
+					elif percent > 0.7: color = (0, 220, 0)
+					else: color = (255, 255, 0)
+					
+					pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(gbarx - 1, gbary - 1, gbarw + 2, gbarh + 2))
+					pygame.draw.rect(screen, color, pygame.Rect(gbarx, gbary, gbarw0, gbarh))
 		
 		self.draw_budget_bar(screen)
 		self.draw_power_balance(screen)
