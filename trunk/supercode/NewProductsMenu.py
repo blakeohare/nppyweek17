@@ -34,7 +34,9 @@ class NewProductsMenu:
 					move = -1
 				elif event.action == 'right':
 					move = 1
-					
+				elif event.action == 'pause':
+					self.bg.next = self.bg
+					self.next = self.bg
 			if move != 0:
 				self.index += move
 				if self.index < 0:

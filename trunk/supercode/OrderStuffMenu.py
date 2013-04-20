@@ -25,6 +25,9 @@ class OrderStuffMenu:
 								self.next = self.bg
 								self.bg.next = self.bg
 								self.bg.session.order_more(plot[4])
+				elif event.action == 'pause':
+					self.bg.next = self.bg
+					self.next = self.bg
 	
 	def render1(self, screen, counter):
 		self.bg.render1(screen, counter)

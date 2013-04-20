@@ -21,6 +21,9 @@ class PriceMenu:
 					click = 1
 				elif event.action == 'rclick':
 					click = -1
+				elif event.action == 'pause':
+					self.next = self.bg
+					self.bg.next = self.bg
 				
 				if click != 0:
 					plot = self.get_plot()
@@ -77,7 +80,7 @@ class PriceMenu:
 			
 			prices = self.bg.session.prices
 			
-			exit = get_text("Close")
+			exit = get_image("misc/close_button")
 			x = self.render_cache.get_width() - exit.get_width() - 30
 			y = 30
 			self.render_cache.blit(exit, (x, y))
