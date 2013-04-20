@@ -2,10 +2,25 @@ import pygame
 import os
 
 _sound_id_to_file = {
+	'init': False,
 	'incorrect_order': None,
 	'cant_drop_box': None,
-	'money_sound': None
+	'money_sound': 'chaching'
 }
+
+def play_sound(id):
+	lookup = _sound_id_to_file
+	if not lookup['init']:
+		for key in lookup.keys():
+			if key != 'init' and lookup[key] != None:
+				path = "sound/" + lookup[key] + '.ogg'
+				path = path.replace('/', os.sep)
+				lookup[key] = pygame.mixer.Sound(path)
+		lookup['init'] = True
+	
+	snd = lookup[id]
+	snd.play()
+
 _images2x = {}
 _images = {}
 def get_image(path):
@@ -50,11 +65,6 @@ def trim(string):
 	while len(string) > 0 and string[-1] in ' \r\n\t':
 		string = string[:-1]
 	return string
-
-# does a lookup between id's and the actual file name
-def play_sound(id):
-	file = _sound_id_to_file.get(id)
-	# TODO: play that file
 
 
 _letter_lookup = {

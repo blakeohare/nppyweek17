@@ -1,4 +1,4 @@
-# I'll do this later after we have oggs
+# Playing sounds is in Util.py
 
 class JukeBox:
 	def __init__(self):
