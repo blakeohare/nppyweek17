@@ -48,6 +48,8 @@ _tile_info_lookup = {
 	'ct': ('tiles/counter-top.png', False),
 	'cb': ('tiles/counter-bottom.png', False),
 	
+	'dd': ('tiles/door.png', True),
+	
 	'tl': ('tiles/counter-topleft.png', False),
 	'bl': ('tiles/counter-bottomleft.png', False),
 	
@@ -79,7 +81,7 @@ class Tile:
 		else:
 			self.image = get_image(data[0])
 			
-			if key[0] == 'F' or key[0] == 'f':
+			if key[0] == 'F' or key[0] == 'f' or key == 'dd':
 				self.image = self.image.convert()
 	
 	def is_passable(self):
@@ -113,7 +115,7 @@ class PlayScene:
 			'c4 f4 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f6 c6',
 			'c4 f4 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f5 f5 f5 f5 f6 c6 xx c4 f4 f5 f5 f5 f6 c6',
 			'c4 f1 f2 f5 f2 f3 c6 xx c4 f1 f2 f2 f2 f2 f2 f2 f2 f3 c6 xx c4 f1 f2 f5 f2 f3 c6',
-			'c1 c2 c2 f5 c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 f5 c2 c2 c3'
+			'c1 c2 c2 dd c2 c2 c3 xx c1 c2 c2 c2 c2 c2 c2 c2 c2 c2 c3 xx c1 c2 c2 dd c2 c2 c3'
 			]
 		
 		# Transpose this
