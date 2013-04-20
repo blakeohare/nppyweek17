@@ -13,6 +13,7 @@ class Session:
 		self.spectrum_available = 1
 		self.restocking = []
 		self.prices = {}
+		self.things_sold = 0
 		self.disgruntled_heroes = []
 		self.disgruntled_villains = []
 		
@@ -33,6 +34,7 @@ class Session:
 		
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
+		self.things_sold += 1
 		if sprite.is_hero:
 			self.balance -= BALANCE_SALE_OFFSET
 		else:

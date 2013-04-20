@@ -321,7 +321,7 @@ class PlayScene:
 			
 			
 	def lose_scene(self, type):
-		self.next = DefeatScene(type, int(self.lifetime / 30.0), self.session.budget)
+		self.next = DefeatScene(type, int(self.lifetime / 30.0), self.session.budget, self.session.things_sold)
 		
 	def update(self, counter):
 		self.lifetime += 1
