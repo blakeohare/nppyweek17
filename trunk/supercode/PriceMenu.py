@@ -132,9 +132,10 @@ class PriceMenu:
 		mx = mouse_x() - _RLEFT
 		my = mouse_y() - _RTOP
 		
-		for plot in self.plots:
-			if mx >= plot[0] and mx <= plot[0] + plot[2]:
-				if my >= plot[1] and my <= plot[1] + plot[3]:
-					return plot
+		if self.plots != None:
+			for plot in self.plots:
+				if mx >= plot[0] and mx <= plot[0] + plot[2]:
+					if my >= plot[1] and my <= plot[1] + plot[3]:
+						return plot
 		return None
 		
