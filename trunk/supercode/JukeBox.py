@@ -9,6 +9,9 @@ def ensure_playing(song):
 	
 	if _now_playing['t'] != song:
 		_now_playing['t'] = song
-		path = ('music/' + song + '.ogg').replace('/', os.sep)
-		pygame.mixer.music.load(path)
-		pygame.mixer.music.play(-1)
+		if song == None:
+			pygame.mixer.music.stop()
+		else:
+			path = ('music/' + song + '.ogg').replace('/', os.sep)
+			pygame.mixer.music.load(path)
+			pygame.mixer.music.play(-1)
