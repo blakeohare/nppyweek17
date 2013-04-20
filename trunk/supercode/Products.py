@@ -129,7 +129,7 @@ NEUTRAL_PRODUCTS = {
 		),
 	"aqua": ("Extreme Energy\nCaffeine Bars",
 		"Tired from a long night on the streets of",
-		"Metropolistuckiland? Look no further! Side effects",
+		"Pythopolis? Look no further! Side effects",
 		"may include uncontrollable shaking, jittery flight,",
 		"and supersonic speech."
 		),
