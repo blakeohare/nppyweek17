@@ -5,7 +5,11 @@ _sound_id_to_file = {
 	'init': False,
 	'incorrect_order': None,
 	'cant_drop_box': None,
-	'money_sound': 'chaching'
+	'money_sound': 'chaching',
+	'funny1': 'ninini',
+	'funny2': 'glub',
+	'funny3': 'shapeshifter',
+	'funny4': 'buzz',
 }
 
 def play_sound(id):
