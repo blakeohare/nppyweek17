@@ -6,6 +6,8 @@ _sound_id_to_file = {
 	'incorrect_order': 'nobad',
 	'cant_drop_box': None,
 	'money_sound': 'chaching',
+	'lift': 'pickup',
+	'drop': 'putdown',
 	'click': 'click',
 	'funny1': 'ninini',
 	'funny2': 'glub',
