@@ -1,5 +1,6 @@
 import pygame
 
+from supercode.InputConfigMenu import *
 from supercode.IntroSlideshow import *
 from supercode.JukeBox import *
 from supercode.PlayScene import *
@@ -37,7 +38,7 @@ class TitleScene:
 		elif key == 'tutorial':
 			self.next = IntroSlideshow()
 		elif key == 'options':
-			self.next = OptionsScene()
+			self.next = InputConfigMenu()
 		elif key == 'credits':
 			self.next = CreditsScene()
 		else:

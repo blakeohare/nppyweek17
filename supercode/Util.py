@@ -3,9 +3,10 @@ import os
 
 _sound_id_to_file = {
 	'init': False,
-	'incorrect_order': None,
+	'incorrect_order': 'nobad',
 	'cant_drop_box': None,
 	'money_sound': 'chaching',
+	'click': 'click',
 	'funny1': 'ninini',
 	'funny2': 'glub',
 	'funny3': 'shapeshifter',
