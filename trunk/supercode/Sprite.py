@@ -83,7 +83,7 @@ class Sprite:
 	# 5 - Walk down to back wall
 	# 6 - walk sideways to door X
 	# 7 - Walk down out of door
-	def automate(self, grid):
+	def automate(self, grid, session):
 		
 		door = HERO_DOOR if self.is_hero else VILLAIN_DOOR
 		door = (door[0] + .5, door[1])
@@ -147,6 +147,7 @@ class Sprite:
 			
 			if self.gruntles < 0:
 				self.phase += 1
+				session.mark_disgruntled(self)
 			
 			
 			if tile.stack != None:
