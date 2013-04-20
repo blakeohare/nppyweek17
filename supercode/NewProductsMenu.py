@@ -20,17 +20,28 @@ class NewProductsMenu:
 	
 	def process_input(self, events, pressed_keys):
 		for event in events:
+			move = 0
 			if event.action == 'lclick' and event.down:
 				if is_over_plot(self.close_button_plot):
 					self.next = self.bg
 					self.bg.next = self.bg
 				if is_over_plot(self.prev_plot) and self.index > 0:
-					self.index -= 1
-					self.render_cache = None
+					move = -1
 				if is_over_plot(self.next_plot) and self.index < 2:
-					self.index += 1
-					self.render_cache = None
+					move = 1
+			if event.down:
+				if event.action == 'left':
+					move = -1
+				elif event.action == 'right':
+					move = 1
 					
+			if move != 0:
+				self.index += move
+				if self.index < 0:
+					self.index = 0
+				if self.index > 2:
+					self.index = 2
+				self.render_cache = None
 	
 	
 	def render1(self, screen, counter):
@@ -61,7 +72,7 @@ class NewProductsMenu:
 			
 			left_margin = 45
 			line_spacing = 20
-			y = 45
+			y = 35
 			rc.blit(line1, (left_margin, y))
 			y += line1.get_height() + line_spacing
 			rc.blit(line2, (left_margin, y))
@@ -79,6 +90,10 @@ class NewProductsMenu:
 			self.render_cache = rc
 		
 		screen.blit(self.render_cache, (_LEFT, _TOP))
+		
+		box_img = get_image_2x('boxes/' + self.keys[self.index], 4)
+		
+		screen.blit(box_img, (_LEFT + 40, _TOP + 265))
 		
 		left_blinks = self.index > 0
 		right_blinks = self.index < 2
