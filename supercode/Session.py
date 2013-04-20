@@ -75,6 +75,13 @@ class Session:
 		b = (b + 1) / 2.0
 		self.balance = b
 	
+	def is_defeat(self):
+		if self.balance < 0:
+			return -1
+		if self.balance > 1:
+			return 1
+		return 0
+	
 	def check_for_customers(self):
 		# Do the calculation individually for heros and villains.
 		# Return a list of 1, or 2 customers or None

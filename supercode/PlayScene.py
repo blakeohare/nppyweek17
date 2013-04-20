@@ -3,6 +3,7 @@
 import random
 
 from supercode.Box import *
+from supercode.DefeatScene import *
 from supercode.JukeBox import *
 from supercode.NewProductsMenu import *
 from supercode.OrderStuffMenu import *
@@ -90,6 +91,7 @@ class PlayScene:
 		self.sprites = [self.player]
 		self.last_color = None
 		self.sprites_by_row = None
+		self.lifetime = 0
 		
 		# Forgive me father for I am about to sin.
 		m = [
@@ -315,8 +317,17 @@ class PlayScene:
 		self.player.try_move(dx, dy)
 			
 	def update(self, counter):
+		self.lifetime += 1
 		ensure_playing('shopmusic')
 		self.session.update()
+		
+		# TODO: pause movement, make a noise while brining attention to the balance meter, and then move to the defeat screen a second later
+		# probably done with a simple transition scene
+		balance = self.session.is_defeat()
+		if balance != 0:
+			self.next = DefeatScene(balance == -1, self.lifetime / 30.0, self.session.budget)
+			return
+		
 		if counter % 10 == 0:
 			r = self.session.pop_restocking()
 			if r != None:

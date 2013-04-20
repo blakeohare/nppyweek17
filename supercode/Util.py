@@ -23,7 +23,8 @@ def play_sound(id):
 		lookup['init'] = True
 	
 	snd = lookup[id]
-	snd.play()
+	if snd != None:
+		snd.play()
 
 _images2x = {}
 _images = {}
