@@ -5,6 +5,7 @@ import random
 from supercode.Box import *
 from supercode.NewProductsMenu import *
 from supercode.OrderStuffMenu import *
+from supercode.PauseMenu import *
 from supercode.PriceMenu import *
 from supercode.Session import *
 from supercode.Sprite import *
@@ -296,6 +297,8 @@ class PlayScene:
 					self.next = PriceMenu(self)
 				elif event.action == 'order':
 					self.next = OrderStuffMenu(self)
+				elif event.action == 'pause':
+					self.next = PauseMenu(self)
 		
 		v = 1.3
 		dx = 0
