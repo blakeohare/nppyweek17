@@ -1,3 +1,4 @@
+from supercode.JukeBox import *
 from supercode.Util import *
 
 MAX_FADE = 18
@@ -30,6 +31,7 @@ class IntroSlideshow:
 		
 	
 	def update(self, counter):
+		ensure_playing('tutorial')
 		if self.target != None:
 			self.fade += 1
 		

@@ -36,7 +36,7 @@ class DefeatScene:
 		self.black = None
 	
 	def update(self, counter):
-		ensure_playing(None)
+		ensure_playing('gameover')
 		self.counter += 1
 		if self.phase != PHASE_SPIN and self.counter >= self.max_counter[self.phase]:
 			self.counter = 0
