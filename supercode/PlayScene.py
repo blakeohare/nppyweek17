@@ -319,6 +319,10 @@ class PlayScene:
 			dy = 1
 		self.player.try_move(dx, dy)
 			
+			
+	def lose_scene(self, type):
+		self.next = DefeatScene(type, int(self.lifetime / 30.0), self.session.budget)
+		
 	def update(self, counter):
 		self.lifetime += 1
 		ensure_playing('shopmusic')
@@ -328,7 +332,18 @@ class PlayScene:
 		# probably done with a simple transition scene
 		balance = self.session.is_defeat()
 		if balance != 0:
-			self.next = DefeatScene(balance == -1, self.lifetime / 30.0, self.session.budget)
+			if balance == -1:
+				type = 'hero_win'
+			else:
+				type = 'villain_win'
+			self.lose_scene(type)
+			return
+		
+		if len(self.session.get_disgruntled_count(True)) > 6:
+			self.lose_scene('hero_angry')
+			return
+		elif len(self.session.get_disgruntled_count(False)) > 6:
+			self.lose_scene('villain_angry')
 			return
 		
 		if counter % 10 == 0:

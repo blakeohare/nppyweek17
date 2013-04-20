@@ -16,9 +16,8 @@ PHASE_SPIN = nextC()
 PHASE_FADE_OUT = nextC()
 
 class DefeatScene:
-	def __init__(self, heroes_win, time, money):
-		self.heros = heroes_win
-		self.bg = get_image('intro/' + ('hero_win' if self.heros else 'villain_win')).convert()
+	def __init__(self, type, time, money):
+		self.bg = get_image('intro/' + type).convert()
 		self.next = self
 		self.counter = 0
 		self.phase = 0
