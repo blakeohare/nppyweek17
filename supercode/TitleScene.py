@@ -16,7 +16,7 @@ class TitleScene:
 					self.selection -= 1
 				elif event.action == 'down':
 					self.selection += 1
-				elif event.action == 'lift':
+				elif event.action == 'pause':
 					self.do()
 			
 			if self.selection < 0:

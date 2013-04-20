@@ -45,11 +45,14 @@ def startgame():
 			elif e.type == pygame.KEYDOWN or e.type == pygame.KEYUP:
 				down = e.type == pygame.KEYDOWN
 				action = None
+				if e.key == pygame.K_w:
+					if keys_pressed[pygame.K_LCTRL] or keys_pressed[pygame.K_RCTRL]:
+						return
 				if e.key == pygame.K_F4:
 					if keys_pressed[pygame.K_LALT] or keys_pressed[pygame.K_RALT]:
 						return
 				elif e.key == pygame.K_ESCAPE:
-					return
+					action = 'pause'
 				elif e.key == pygame.K_UP:
 					action = 'up'
 				elif e.key == pygame.K_LEFT:
@@ -63,11 +66,13 @@ def startgame():
 				elif e.key == pygame.K_f:
 					action = 'full'
 				elif e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
-					action = 'lift'
+					action = 'pause'
 				elif e.key == pygame.K_r:
 					action = 'menu'
 				elif e.key == pygame.K_t:
 					action = 'order'
+				elif e.key == pygame.K_RETURN:
+					action = 'pause'
 				
 				if action != None:
 					events.append(MyEvent(action, down))
