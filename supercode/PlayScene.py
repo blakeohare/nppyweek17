@@ -3,6 +3,7 @@
 import random
 
 from supercode.Box import *
+from supercode.JukeBox import *
 from supercode.NewProductsMenu import *
 from supercode.OrderStuffMenu import *
 from supercode.PauseMenu import *
@@ -314,6 +315,7 @@ class PlayScene:
 		self.player.try_move(dx, dy)
 			
 	def update(self, counter):
+		ensure_playing('shopmusic')
 		self.session.update()
 		if counter % 10 == 0:
 			r = self.session.pop_restocking()
