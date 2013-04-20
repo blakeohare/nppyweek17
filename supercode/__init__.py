@@ -15,7 +15,7 @@ class MyEvent:
 def startgame():
 	pygame.init()
 	r_screen = pygame.display.set_mode((1000, 700))
-	v_screen = pygame.Surface((500, 350))
+	v_screen = pygame.Surface((500, 350)).convert()
 	pygame.display.set_caption("Super Shop")
 	fps = 30
 	active_scene = TitleScene()
