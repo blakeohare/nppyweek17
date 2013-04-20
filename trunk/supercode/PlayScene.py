@@ -27,6 +27,7 @@ _tile_info_lookup = {
 	'c2': ('tiles/walltop-lowermiddle.png', False),
 	'c3': ('tiles/walltop-lowerright.png', False),
 	'c5': ('tiles/wall-bottom.png', False),
+	
 	'f1': ('tiles/floor-lowerleft.png', True),
 	'f2': ('tiles/floor-lowermiddle.png', True),
 	'f3': ('tiles/floor-lowerright.png', True),
@@ -70,6 +71,9 @@ class Tile:
 			self.image = None
 		else:
 			self.image = get_image(data[0])
+			
+			if key[0] == 'F' or key[0] == 'f':
+				self.image = self.image.convert()
 	
 	def is_passable(self):
 		return self.passable and (self.stack == None or len(self.stack) == 0)
