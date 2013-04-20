@@ -19,7 +19,7 @@ HERO_PRODUCTS = {
 		"draperies and then sing and frolic in public",
 		"places."
 		),
-	"lime": ("Super Ear Flick of Epic Justice",
+	"lime": ("Super Ear Flick",
 		"Just like Mom used to give you, this powerful",
 		"device delivers a solid thumping to the upside",
 		"of any perpetrators skull, making them immediately",
