@@ -13,12 +13,24 @@ class Session:
 		self.spectrum_available = 1
 		self.restocking = []
 		self.prices = {}
+		self.disgruntled_heroes = []
+		self.disgruntled_villains = []
+		
 		for color in ALL_COLORS:
 			for polarity in POLARITIES:
 				key = polarity + '_' + color
 				self.prices[key] = STARTING_ITEM_PRICE
 		
 	
+	def mark_disgruntled(self, sprite):
+		if sprite.is_hero:
+			self.disgruntled_heroes.append(sprite.key)
+		else:
+			self.disgruntled_villains.append(sprite.key)
+	
+	def get_disgruntled_count(self, is_hero):
+		return self.disgruntled_heroes if is_hero else self.disgruntled_villains
+		
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
 		if sprite.is_hero:

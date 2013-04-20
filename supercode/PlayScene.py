@@ -366,7 +366,7 @@ class PlayScene:
 		
 		for sprite in self.sprites:
 			if sprite != self.player:
-				sprite.automate(self.grid)
+				sprite.automate(self.grid, self.session)
 		
 		new_sprites = []
 		for sprite in self.sprites:
@@ -415,6 +415,24 @@ class PlayScene:
 		self.draw_options(screen)
 		
 		screen.blit(get_image('misc/radio'), (529, 615))
+		
+		for is_hero in (False, True):
+			x = 717 if is_hero else 86
+			y = 640
+			i = 0
+			x += 6
+			sprite_types = self.session.get_disgruntled_count(is_hero)
+			while i < 6:
+				sprite_type = None if (i >= len(sprite_types)) else sprite_types[i]
+				
+				if sprite_type != None:
+					img = get_image('fwownyface/' + sprite_type)
+					screen.blit(img, (x, y))
+				
+				pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x - 3, y - 3, 22, 22), 1)
+				
+				i += 1
+				x += 28
 	
 	def draw_options(self, screen):
 		
