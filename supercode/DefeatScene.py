@@ -16,14 +16,15 @@ PHASE_SPIN = nextC()
 PHASE_FADE_OUT = nextC()
 
 class DefeatScene:
-	def __init__(self, type, time, money):
+	def __init__(self, type, time, money, things_sold):
 		self.bg = get_image('intro/' + type).convert()
+		self.things = things_sold
 		self.next = self
 		self.counter = 0
 		self.phase = 0
 		self.time = time
 		self.money = money
-		self.score = time + money
+		self.score = time + money + self.things * 10
 		self.max_counter = {
 			PHASE_FADE_IN : 30,
 			PHASE_POST_FADE : 90,
@@ -71,28 +72,35 @@ class DefeatScene:
 		elif self.phase == PHASE_POST_FADE:
 			pass
 		else:
-			
+			spacing = 110
 			ty = 180
-			my = 320
-			sy = 460
+			my = ty + spacing
+			cy = my + spacing
+			sy = cy + spacing
+			
+			lm = 644
 			if self.phase >= PHASE_SHOW_LABELS:
-				screen.blit(get_text("Time:"), (659, ty))
-				screen.blit(get_text("Money:"), (659, my))
-				screen.blit(get_text("Score:"), (659, sy))
+				screen.blit(get_text("Time:"), (lm, ty))
+				screen.blit(get_text("Money:"), (lm, my))
+				screen.blit(get_text("Score:"), (lm, sy))
+				screen.blit(get_text("Things Sold:"), (lm, cy))
 			
 			time_shown = self.time
 			money_shown = self.money
 			score_shown = self.score
+			things_shown = self.things
 			
 			if self.phase == PHASE_TICK_UP:
 				time_shown = int(self.time * progress)
 				money_shown = int(self.money * progress)
 				score_shown = int(self.score * progress)
+				things_shown = int(self.things * progress)
 			
 			if self.phase >= PHASE_TICK_UP:
 				screen.blit(get_text(str(time_shown)), (690, ty + 30))
 				screen.blit(get_text(str(money_shown)), (690, my + 30))
 				screen.blit(get_text(str(score_shown)), (690, sy + 30))
+				screen.blit(get_text(str(things_shown)), (690, cy + 30))
 				
 			if self.phase == PHASE_FADE_OUT:
 				self.black.set_alpha(int(255 * progress))
