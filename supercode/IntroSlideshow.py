@@ -23,8 +23,7 @@ class IntroSlideshow:
 			get_image('intro/slide9'),
 			get_image('intro/slide10'),
 			get_image('intro/slide11'),
-			get_image('intro/slide12'),
-			get_image('intro/slide13')
+			get_image('intro/slide12')
 		]
 		
 		self.images = legacy_map(lambda x:x.convert(), self.images)
