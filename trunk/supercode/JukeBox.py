@@ -1,8 +1,14 @@
 # Playing sounds is in Util.py
 
-class JukeBox:
-	def __init__(self):
-		self.now_playing = None
+import os
+import pygame
+
+_now_playing = { 't': None }
+
+def ensure_playing(song):
 	
-	def play(self, song):
-		file = 'music' + os.sep + song + '.mp3'
+	if _now_playing['t'] != song:
+		_now_playing['t'] = song
+		path = ('music/' + song + '.ogg').replace('/', os.sep)
+		pygame.mixer.music.load(path)
+		pygame.mixer.music.play(-1)

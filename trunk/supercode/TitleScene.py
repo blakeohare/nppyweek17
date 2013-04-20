@@ -1,6 +1,7 @@
 import pygame
 
 from supercode.IntroSlideshow import *
+from supercode.JukeBox import *
 from supercode.PlayScene import *
 from supercode.Util import *
 
@@ -43,7 +44,7 @@ class TitleScene:
 			pass # This shouldn't happen
 	
 	def update(self, counter):
-		pass
+		ensure_playing('title')
 	
 	def render1(self, screen, render_counter):
 		# render at full resolution
