@@ -1,5 +1,6 @@
 import pygame
 
+from supercode.CreditsScene import *
 from supercode.InputConfigMenu import *
 from supercode.IntroSlideshow import *
 from supercode.JukeBox import *
