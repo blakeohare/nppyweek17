@@ -1,6 +1,5 @@
 player:4
-joker:3
-superman:3
+hero2:4
 hero1:4
 villain1:4
 villain2:4

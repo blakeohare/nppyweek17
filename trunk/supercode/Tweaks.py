@@ -1,5 +1,5 @@
 
-HEROES = ('superman', 'hero1')
+HEROES = ('hero1', 'hero2')
 VILLAINS = ('villain1', 'villain2')
 
 ALL_COLORS = (
