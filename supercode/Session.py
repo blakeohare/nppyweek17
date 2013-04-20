@@ -22,9 +22,9 @@ class Session:
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
 		if sprite.is_hero:
-			self.balance += 0.02
+			self.balance -= BALANCE_SALE_OFFSET
 		else:
-			self.balance -= 0.02
+			self.balance += BALANCE_SALE_OFFSET
 	
 	def pop_restocking(self):
 		if len(self.restocking) > 0:
@@ -70,6 +70,10 @@ class Session:
 	
 	def update(self):
 		self.counter += 1
+		b = self.balance
+		b = (b * 2 - 1) * BALANCE_MULTIPLIER
+		b = (b + 1) / 2.0
+		self.balance = b
 	
 	def check_for_customers(self):
 		# Do the calculation individually for heros and villains.
