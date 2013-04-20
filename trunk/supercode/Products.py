@@ -43,8 +43,11 @@ HERO_PRODUCTS = {
 	"purple": ("Sidekick in a Box",
 		"Just add water! Tragic backstory not included."
 		),
-	"pink": None,
-	"brown": None,
+	"pink": ("The White Hat",
+		"Very stylish model, and guaranteed to let people know"
+		"where you stand!"),
+	"brown": ("Solar Powered Flashlight",
+		"Superheroes are environmentally conscious too.")
 }
 
 VILLAIN_PRODUCTS = {
@@ -90,8 +93,14 @@ VILLAIN_PRODUCTS = {
 		"*Company is not responsible for customer",
 		"  dissatisfaction with Minions"
 		),
-	"pink": None,
-	"brown": None,
+	"pink": ("The Black Hat",
+		"Extremely dapper, this hat lets all know of your",
+		"villainous intent"),
+	"brown": ("Candy Magnet",
+		"Any candy in the possession of a child will be",
+		"irresistibly drawn to this magnet. Beware: children",
+		"with an especially strong grip may end up caught as",
+		"well. Use at your own risk.")
 }
 
 NEUTRAL_PRODUCTS = {
@@ -131,8 +140,10 @@ NEUTRAL_PRODUCTS = {
 	"purple": ("Insignia Kit",
 		"Customizable logo for the front of your costume."
 		),
-	"pink": None,
-	"brown": None,
+	"pink": ("Rainbow Hat",
+		"Because sometimes you just want to be fancy!"),
+	"brown": ("Spork of +5 Dexterity",
+		"Practical"),
 }
 
 def get_product(key):
