@@ -48,7 +48,7 @@ class OrderStuffMenu:
 			line2 = get_text("Items per palette: 15 ($750)")
 			line3 = get_small_text("(4 hero, 4 villain, 7 neutral)")
 			
-			lines = [line1, line2, line3, get_small_text(' '), get_text("ORDER:")]
+			lines = [line1, line2, line3, get_small_text(' '), get_text("Click to order:")]
 			
 			x = 35
 			y = 28
