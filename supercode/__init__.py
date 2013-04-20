@@ -4,6 +4,7 @@ import os
 import math
 import random
 
+from supercode.InputConfigMenu import get_scheme
 from supercode.TitleScene import TitleScene
 
 SHOW_FPS = True
@@ -24,6 +25,8 @@ def startgame():
 	counter = 0
 	pressed_keys = {}
 	while active_scene != None:
+		
+		input = get_scheme()
 		
 		start = time.time()
 		
@@ -53,9 +56,12 @@ def startgame():
 				if e.key == pygame.K_F4:
 					if keys_pressed[pygame.K_LALT] or keys_pressed[pygame.K_RALT]:
 						return
-				elif e.key == pygame.K_ESCAPE:
+				
+				if e.key == pygame.K_ESCAPE or e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
 					action = 'pause'
-				elif e.key == pygame.K_UP:
+				
+				# arrow keys will ALWAYS work
+				if e.key == pygame.K_UP:
 					action = 'up'
 				elif e.key == pygame.K_LEFT:
 					action = 'left'
@@ -63,18 +69,45 @@ def startgame():
 					action = 'right'
 				elif e.key == pygame.K_DOWN:
 					action = 'down'
-				elif e.key == pygame.K_s:
-					action = 'single'
-				elif e.key == pygame.K_f:
-					action = 'full'
-				elif e.key == pygame.K_SPACE or e.key == pygame.K_RETURN:
-					action = 'pause'
-				elif e.key == pygame.K_r:
-					action = 'menu'
+				
+				# r and t are used in all layouts
+				if e.key == pygame.K_r:
+					action = 'menu' # price
 				elif e.key == pygame.K_t:
-					action = 'order'
-				elif e.key == pygame.K_RETURN:
-					action = 'pause'
+					action = 'order' # reorder
+				
+				
+				if input == 'dvorak':
+					if e.key == pygame.K_a:
+						action = 'left'
+					elif e.key == pygame.K_o:
+						action = 'down'
+					elif e.key == pygame.K_e:
+						action = 'right'
+					elif e.key == pygame.K_COMMA:
+						action = 'up'
+					elif e.key == pygame.K_PERIOD:
+						action = 'full'
+					elif e.key == pygame.K_QUOTE:
+						action = 'single'
+				elif input == 'qwerty':
+					if e.key == pygame.K_w:
+						action = 'up'
+					elif e.key == pygame.K_a:
+						action = 'left'
+					elif e.key == pygame.K_s:
+						action = 'down'
+					elif e.key == pygame.K_d:
+						action = 'right'
+					elif e.key == pygame.K_e:
+						action = 'full'
+					elif e.key == pygame.K_q:
+						action = 'single'
+				elif input == 'arrows':
+					if e.key == pygame.K_s:
+						action = 'single'
+					elif e.key == pygame.K_f:
+						action = 'full'
 				
 				if action != None:
 					events.append(MyEvent(action, down))

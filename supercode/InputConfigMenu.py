@@ -20,6 +20,9 @@ def save_input():
 	c.close()
 
 
+def get_scheme():
+	return _config['t']
+
 class InputConfigMenu:
 	def __init__(self):
 		self.next = self
