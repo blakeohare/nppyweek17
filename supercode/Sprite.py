@@ -1,4 +1,5 @@
 import os
+from supercode.Tweaks import *
 from supercode.Util import *
 
 _max_walk_lookup = {}
@@ -30,6 +31,7 @@ class Sprite:
 		self.counter_slot = -1
 		self.lifetime = 0
 		self.destroy_me = False
+		self.gruntles = STARTING_GRUNTLES_COUNT
 	
 	def set_counter_slot(self, n):
 		self.counter_slot = n
@@ -140,6 +142,12 @@ class Sprite:
 			cx = int(self.x)
 			cy = int(counter_y - 2)
 			tile = grid[cx][cy]
+			
+			self.gruntles -= 1
+			
+			if self.gruntles < 0:
+				self.phase += 1
+			
 			
 			if tile.stack != None:
 				for item in tile.stack:
