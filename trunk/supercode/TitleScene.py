@@ -1,6 +1,8 @@
 import pygame
-from supercode.Util import *
+
+from supercode.IntroSlideshow import *
 from supercode.PlayScene import *
+from supercode.Util import *
 
 class TitleScene:
 	def __init__(self):
@@ -32,7 +34,7 @@ class TitleScene:
 		elif key == 'play':
 			self.next = PlayScene()
 		elif key == 'tutorial':
-			self.next = TutorialScene()
+			self.next = IntroSlideshow()
 		elif key == 'options':
 			self.next = OptionsScene()
 		elif key == 'credits':
