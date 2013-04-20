@@ -6,7 +6,7 @@ _sound_id_to_file = {
 	'cant_drop_box': None,
 	'money_sound': None
 }
-
+_images2x = {}
 _images = {}
 def get_image(path):
 	img = _images.get(path, None)
@@ -26,6 +26,15 @@ def get_image(path):
 			img = img.convert()
 		_images[path] = img
 		_images[canonical_path] = img
+	return img
+
+def get_image_2x(path, scale):
+	rpath = str(scale) + '|' + path
+	img = _images2x.get(rpath, None)
+	if img == None:
+		t = get_image(path)
+		img = pygame.transform.scale(t, (t.get_width() * scale, t.get_height() * scale))
+		_images2x[rpath] = img
 	return img
 
 def legacy_map(function, items):
