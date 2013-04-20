@@ -5,7 +5,7 @@ This entry is written in python, and tested in 2.7, 3.2 and 3.3, with the PyGame
 To run the game, simply run run_game.py in this folder.
 
 This is a shop simulator game.  You are attempting to provide heroes and
- villians with suplies without giving one side an advantage to in order to
+ villains with suplies without giving one side an advantage to in order to
  maximize your profit.
 
 It is highly recommended you select intro/tutorial before playing.
