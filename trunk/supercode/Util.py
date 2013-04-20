@@ -13,6 +13,10 @@ _sound_id_to_file = {
 	'funny2': 'glub',
 	'funny3': 'shapeshifter',
 	'funny4': 'buzz',
+	'hero1_mad': 'madmalehero',
+	'hero2_mad': 'madfemalehero',
+	'villain1_mad': 'madmalevillian',
+	'villain2_mad': 'madfemalevillian',
 }
 
 def play_sound(id):

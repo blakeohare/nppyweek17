@@ -148,6 +148,7 @@ class Sprite:
 			if self.gruntles < 0:
 				self.phase += 1
 				session.mark_disgruntled(self)
+				play_sound(self.key + '_mad')
 			
 			
 			if tile.stack != None:
