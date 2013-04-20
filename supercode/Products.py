@@ -33,7 +33,7 @@ HERO_PRODUCTS = {
 		"reflective models that prevent accidental laser",
 		"eyes for an additional fee."
 		),
-	"aqua": ("Extra Strength Whitening Toothpaste",
+	"aqua": ("Extra-Strength\nWhitening Toothpaste",
 		"For that pearly white superhero smile. As a bonus,",
 		"can also be used to blind your opponents."
 		),
@@ -127,12 +127,11 @@ NEUTRAL_PRODUCTS = {
 		"quick getaway! Includes a small bell and a basket",
 		"for convenient storage."
 		),
-	"aqua": ("Extreme Energy Caffeine Bars",
+	"aqua": ("Extreme Energy\nCaffeine Bars",
 		"Tired from a long night on the streets of",
-		"Metropolistuckiland? Need to recharge that energy",
-		"bar? Look no further! Side effects may include",
-		"uncontrollable shaking, jittery flight, and",
-		"supersonic speech."
+		"Metropolistuckiland? Look no further! Side effects",
+		"may include uncontrollable shaking, jittery flight,",
+		"and supersonic speech."
 		),
 	"blue": ("Police Scanner",
 		"What? It's practical!"

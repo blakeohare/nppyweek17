@@ -66,17 +66,19 @@ class NewProductsMenu:
 			rc.blit(cb, (close_x, close_y))
 			self.close_button_plot = (close_x + _LEFT, close_y + _TOP, cb.get_width(), cb.get_height())
 			
-			line1 = get_text("New Stuff " + self.forwhom[self.index] + "!")
-			line2 = get_text(title)
+			
+			
+			lines1 = [get_text("New Stuff " + self.forwhom[self.index] + "!")]
+			for line in title.split('\n'):
+				lines1.append(get_text(line))
 			lines = legacy_map(get_small_text, description)
 			
 			left_margin = 45
 			line_spacing = 20
 			y = 35
-			rc.blit(line1, (left_margin, y))
-			y += line1.get_height() + line_spacing
-			rc.blit(line2, (left_margin, y))
-			y += line2.get_height() + line_spacing
+			for line in lines1:
+				rc.blit(line, (left_margin, y))
+				y += line.get_height() + line_spacing
 			
 			for img in lines:
 				
