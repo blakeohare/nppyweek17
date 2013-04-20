@@ -9,6 +9,8 @@ class PauseMenu:
 		self.bg = bg
 		self.img = None
 		self.index = 0
+		self.sounds = ['ninini', 'glub', 'shapeshifter', 'buzz']
+		self.sound_index = 0
 	
 	def update(self, counter):
 		pass
@@ -30,7 +32,8 @@ class PauseMenu:
 			self.bg.next = self.bg
 			self.next = self.bg
 		elif index == 1: # make funny noise
-			pass # TODO: this
+			play_sound('funny' + str(self.sound_index % len(self.sounds) + 1))
+			self.sound_index += 1
 		elif index == 2: # exit to menu
 			from supercode.TitleScene import TitleScene # dafuq? why will the next line not work even though this is at the top of the file?
 			self.next = TitleScene()
