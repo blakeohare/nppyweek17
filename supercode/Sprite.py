@@ -240,12 +240,11 @@ class Sprite:
 	
 	
 	def render(self, screen, offsetx, offsety, counter):
-		hold = 'hold_' if self.holding else ''
 		
-		#TODO: remove this when the other characters are checked in with hold images
-		if self.key != 'player':
+		if self.holding == None or len(self.holding) == 0:
 			hold = ''
-		
+		else:
+			hold = 'hold_'
 		
 		if self.walking:
 			file = ''.join([
@@ -268,6 +267,7 @@ class Sprite:
 				self.direction,
 				'.png'])
 		img = get_image(file)
+		
 		x = offsetx + int(self.x * 16 - 8)
 		y = offsety + int(self.y * 16 - 32)
 		screen.blit(get_image(file), (x, y))
