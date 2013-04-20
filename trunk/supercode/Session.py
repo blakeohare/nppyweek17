@@ -21,6 +21,10 @@ class Session:
 	
 	def item_sold(self, sprite, item):
 		self.budget += self.prices[item]
+		if sprite.is_hero:
+			self.balance += 0.02
+		else:
+			self.balance -= 0.02
 	
 	def pop_restocking(self):
 		if len(self.restocking) > 0:
