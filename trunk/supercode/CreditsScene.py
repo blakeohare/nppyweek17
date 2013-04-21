@@ -37,6 +37,7 @@ class CreditsScene:
 		pass
 	
 	def render2(self, screen, counter):
+		screen.fill((0, 0, 0))
 		rate = 3.0
 		y = int(screen.get_height() - self.counter * rate)
 		
